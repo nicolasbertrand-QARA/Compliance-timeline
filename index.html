@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDSW Regulatory Timeline 2026-2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* OKLCH palette — neutrals tinted toward HealthTech yellow hue (~90) */
+    --surface-0: oklch(97.5% 0.006 90);    /* page bg */
+    --surface-1: oklch(99% 0.003 90);      /* cards / sidebar */
+    --surface-2: oklch(95.5% 0.008 90);    /* hover bg */
+    --surface-3: oklch(91% 0.012 90);      /* borders */
+
+    --ink-primary: oklch(20% 0.025 260);   /* #12305d navy-tinted */
+    --ink-secondary: oklch(38% 0.018 260);
+    --ink-tertiary: oklch(52% 0.012 260);
+    --ink-muted: oklch(65% 0.008 260);
+
+    --gold: oklch(85% 0.17 90);            /* #ffc800 HealthTech yellow */
+    --gold-soft: oklch(95% 0.05 90);
+    --gold-dim: oklch(72% 0.14 90);
+
+    --accent: oklch(62% 0.22 30);          /* #ff512c secondary orange */
+    --accent-soft: oklch(93% 0.04 30);
+
+    --navy: oklch(24% 0.07 260);           /* #12305d HealthTech navy */
+    --navy-mid: oklch(30% 0.06 260);
+
+    /* Semantic topic colors in OKLCH */
+    --c-mdr: oklch(52% 0.14 260);
+    --c-ai: oklch(48% 0.18 300);
+    --c-standards: oklch(50% 0.14 160);
+    --c-cyber: oklch(52% 0.18 25);
+    --c-france: oklch(58% 0.16 75);
+    --c-uk: oklch(48% 0.14 275);
+    --c-us: oklch(52% 0.18 340);
+    --c-other: oklch(48% 0.12 195);
+    --c-data: oklch(48% 0.16 290);
+
+    /* Spacing on 4pt grid */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 96px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    background: var(--surface-0);
+    color: var(--ink-primary);
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-kerning: normal;
+  }
+
+  /* ===== HEADER (compact) ===== */
+  .header {
+    background: var(--navy);
+    padding: var(--space-lg) var(--space-xl);
+  }
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+  .header-logo {
+    height: 28px;
+    width: auto;
+  }
+  .header h1 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: oklch(98% 0.005 90);
+    line-height: 1.2;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .header-meta {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: oklch(62% 0.01 260);
+  }
+  .header-meta::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .header-admin {
+    color: oklch(55% 0.01 260);
+    transition: color 0.15s;
+    display: flex;
+  }
+  .header-admin:hover { color: var(--gold); }
+
+  /* ===== LAYOUT: sidebar + content ===== */
+  .page-layout {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-xl) var(--space-4xl);
+    align-items: start;
+  }
+
+  /* ===== FILTERS (sidebar) ===== */
+  .filters-sidebar {
+    position: sticky;
+    top: var(--space-lg);
+    padding: var(--space-md);
+    background: oklch(99% 0.003 90 / 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid var(--surface-3);
+    border-radius: 12px;
+  }
+  .filters-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .filter-btn {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1.5px solid transparent;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+    width: 100%;
+  }
+  .filter-btn:hover {
+    background: var(--surface-2);
+  }
+  .filter-btn.active {
+    background: var(--ink-primary);
+    color: var(--surface-1);
+  }
+  .filter-btn.excluded {
+    background: var(--surface-2);
+    color: var(--ink-muted);
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  .filter-btn .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .filter-btn-all {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .filter-btn-all.active {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .filter-sep {
+    height: 1px;
+    background: var(--surface-3);
+    margin: var(--space-sm) 0;
+  }
+  .filter-stats {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--surface-3);
+  }
+  .filter-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 3px 0;
+  }
+  .filter-stat-label {
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .filter-stat-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ink-primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ===== CONTENT AREA ===== */
+  .content { min-width: 0; }
+
+  /* ===== YEAR ===== */
+  .year-section {
+    margin-bottom: var(--space-3xl);
+  }
+  .year-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .year-label {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 500;
+    color: var(--ink-primary);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .year-count {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
+  .year-rule {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--surface-3) 60%);
+    border: none;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* ===== TIMELINE GRID ===== */
+  .tl-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .tl-grid::before {
+    content: '';
+    position: absolute;
+    left: 110px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--surface-3);
+  }
+
+  /* ===== MILESTONE ===== */
+  .ms {
+    display: contents;
+    transition: opacity 0.25s;
+  }
+  .ms.hidden { display: none; }
+
+  .ms-date {
+    padding: var(--space-md) var(--space-md) var(--space-md) 0;
+    text-align: right;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink-tertiary);
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    position: relative;
+  }
+  .ms-date::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 22px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .ms-body {
+    padding: var(--space-md) 0 var(--space-2xl) var(--space-lg);
+  }
+
+  /* Variants */
+  .ms--critical .ms-body {
+    background: var(--navy);
+    padding: var(--space-lg);
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+    border-radius: 12px;
+  }
+  .ms--critical .ms-title { color: oklch(96% 0.005 90); }
+  .ms--critical .ms-title a:hover { color: var(--gold); }
+  .ms--critical .ms-desc { color: oklch(72% 0.01 260); line-height: 1.65; }
+  .ms--critical .ms-tag { background: var(--gold); color: var(--navy); }
+
+  .ms--highlight .ms-body {
+    background: var(--gold-soft);
+    padding: var(--space-lg);
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+    border-radius: 12px;
+  }
+
+  .ms-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm);
+  }
+  .ms-tag {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .tag-critical { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .tag-high { background: var(--gold-dim); color: var(--navy); }
+  .tag-medium { background: var(--surface-3); color: var(--ink-secondary); }
+  .tag-new { background: oklch(50% 0.14 160); color: oklch(98% 0.005 90); }
+  .tag-in-force { background: var(--navy); color: var(--gold); }
+  .tag-draft { background: var(--ink-muted); color: oklch(98% 0.005 90); }
+  .tag-proposed { background: oklch(48% 0.16 290); color: oklch(98% 0.005 90); }
+
+  .ms-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--ink-primary);
+    line-height: 1.4;
+  }
+  .ms-title a {
+    color: inherit;
+    text-decoration: none;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .ms-title a:hover {
+    text-decoration: underline;
+    color: var(--gold-dim);
+  }
+  .ms-desc {
+    font-size: 0.8125rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    margin-top: var(--space-xs);
+    max-width: 65ch;
+  }
+  .ms-topics {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-top: var(--space-sm);
+  }
+  .tp {
+    font-size: 0.625rem;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .tp-mdr { background: oklch(92% 0.04 260); color: oklch(35% 0.1 260); }
+  .tp-ai { background: oklch(92% 0.04 300); color: oklch(35% 0.12 300); }
+  .tp-standards { background: oklch(93% 0.04 160); color: oklch(32% 0.1 160); }
+  .tp-cyber { background: oklch(93% 0.04 25); color: oklch(38% 0.12 25); }
+  .tp-france { background: oklch(94% 0.04 75); color: oklch(38% 0.12 75); }
+  .tp-uk { background: oklch(92% 0.04 275); color: oklch(35% 0.1 275); }
+  .tp-us { background: oklch(93% 0.04 340); color: oklch(38% 0.12 340); }
+  .tp-other { background: oklch(93% 0.04 195); color: oklch(35% 0.1 195); }
+  .tp-data { background: oklch(93% 0.04 290); color: oklch(35% 0.12 290); }
+
+  /* Dot colors */
+  .ms[data-lead="mdr"] .ms-date::after { background: var(--c-mdr); }
+  .ms[data-lead="ai"] .ms-date::after { background: var(--c-ai); }
+  .ms[data-lead="standards"] .ms-date::after { background: var(--c-standards); }
+  .ms[data-lead="cyber"] .ms-date::after { background: var(--c-cyber); }
+  .ms[data-lead="france"] .ms-date::after { background: var(--c-france); }
+  .ms[data-lead="uk"] .ms-date::after { background: var(--c-uk); }
+  .ms[data-lead="us"] .ms-date::after { background: var(--c-us); }
+  .ms[data-lead="other"] .ms-date::after { background: var(--c-other); }
+  .ms[data-lead="data"] .ms-date::after { background: var(--c-data); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--navy);
+    padding: var(--space-2xl) var(--space-xl);
+  }
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+  .footer-logo {
+    height: 24px;
+    width: auto;
+    opacity: 0.7;
+  }
+  .footer p {
+    font-size: 0.6875rem;
+    color: oklch(55% 0.01 250);
+    line-height: 1.6;
+    max-width: 52ch;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .page-layout {
+      grid-template-columns: 1fr;
+      padding: var(--space-lg) var(--space-md) var(--space-2xl);
+    }
+    .filters-sidebar {
+      position: static;
+      border-bottom: 1px solid var(--surface-3);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .filters {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .filter-btn { width: auto; }
+    .filter-stats { display: none; }
+    .filter-sep { display: none; }
+    .tl-grid { grid-template-columns: 1fr; }
+    .tl-grid::before { display: none; }
+    .ms-date {
+      text-align: left;
+      padding: var(--space-md) 0 0 0;
+    }
+    .ms-date::after { display: none; }
+    .ms-body { padding: var(--space-xs) 0 var(--space-xl) 0; }
+    .ms--critical .ms-body,
+    .ms--highlight .ms-body { margin-left: 0; }
+    .header { padding: var(--space-md); }
+    .header-inner { flex-direction: column; gap: var(--space-xs); }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <img src="https://cdn.prod.website-files.com/6850272ec839a090ed996f46/68c98307d72aef67f50014d9_68c905ee252fff8d68ba2807_logo-healthtech.svg" alt="Theodo HealthTech" class="header-logo">
+      <h1>MDSW Regulatory Timeline 2026&ndash;2030</h1>
+    </div>
+    <div class="header-right">
+      <span class="header-meta">Updated 16 April 2026</span>
+      <a href="regulatory-timeline-admin.html" class="header-admin" title="Back office">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 1.5h3l.4 1.8.7.3 1.6-.8 2.1 2.1-.8 1.6.3.7 1.8.4v3l-1.8.4-.3.7.8 1.6-2.1 2.1-1.6-.8-.7.3-.4 1.8h-3l-.4-1.8-.7-.3-1.6.8-2.1-2.1.8-1.6-.3-.7L.4 9.5v-3l1.8-.4.3-.7-.8-1.6 2.1-2.1 1.6.8.7-.3.4-1.8z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="page-layout">
+  <aside class="filters-sidebar">
+    <div class="filters-label">Topics</div>
+    <div class="filters" id="filters">
+      <button class="filter-btn filter-btn-all active" data-topic="all">All topics</button>
+      <div class="filter-sep"></div>
+      <button class="filter-btn" data-topic="mdr"><span class="dot" style="background:var(--c-mdr)"></span>EU MDR/IVDR</button>
+      <button class="filter-btn" data-topic="ai"><span class="dot" style="background:var(--c-ai)"></span>AI Act</button>
+      <button class="filter-btn" data-topic="standards"><span class="dot" style="background:var(--c-standards)"></span>Standards</button>
+      <button class="filter-btn" data-topic="cyber"><span class="dot" style="background:var(--c-cyber)"></span>Cybersecurity</button>
+      <button class="filter-btn" data-topic="france"><span class="dot" style="background:var(--c-france)"></span>France</button>
+      <button class="filter-btn" data-topic="data"><span class="dot" style="background:var(--c-data)"></span>Data / EHDS</button>
+      <button class="filter-btn" data-topic="uk"><span class="dot" style="background:var(--c-uk)"></span>UK</button>
+      <button class="filter-btn" data-topic="us"><span class="dot" style="background:var(--c-us)"></span>US (FDA)</button>
+      <button class="filter-btn" data-topic="other"><span class="dot" style="background:var(--c-other)"></span>Other Regions</button>
+    </div>
+    <div class="filter-stats">
+      <div class="filter-stat"><span class="filter-stat-label">Showing</span><span class="filter-stat-num" id="s-visible">0</span></div>
+      <div class="filter-stat"><span class="filter-stat-label">Total</span><span class="filter-stat-num" id="s-total">0</span></div>
+      <div class="filter-stat"><span class="filter-stat-label">Urgent</span><span class="filter-stat-num" id="s-urgent">0</span></div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div id="tl"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><img src="https://cdn.prod.website-files.com/6850272ec839a090ed996f46/68c98307d72aef67f50014d9_68c905ee252fff8d68ba2807_logo-healthtech.svg" alt="Theodo HealthTech" class="footer-logo"></div>
+    <p>Based on publicly available regulatory information as of April 2026. Dates are indicative and subject to change. This is not legal advice.</p>
+  </div>
+</footer>
+
+<script>
+const M=[
+{d:"2026-02-02",l:"2 Feb 2026",y:2026,t:"FDA QMSR In Force",x:"Incorporates ISO 13485:2016 by reference, replacing decades-old QSR. Major harmonization for EU-based manufacturers.",u:"https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr",tp:["us","standards"],tg:["in-force"],v:"n"},
+{d:"2026-01-26",l:"Jan 2026",y:2026,t:"South Korea: Fast-Track + AI Basic Act + DMPA",x:"Three developments: market access cut to 80\u2013140 days, healthcare AI classified High-Impact, pre-approved change management for algorithms.",u:"https://www.complifegroup.com/2026/02/18/south-korea-medical-devices/",tp:["other","ai"],tg:["new"],v:"n"},
+{d:"2026-03-10",l:"10 Mar 2026",y:2026,t:"Singapore AIHGle 2.0",x:"Refreshed AI in Healthcare Guidelines with seven ethical principles including generative AI provisions.",u:"https://www.bakermckenzie.com/en/insight/publications/2026/03/singapore-moh-and-hsa-launch-refreshed-ai-in-healthcare-guidelines",tp:["other","ai"],tg:["new"],v:"n"},
+{d:"2026-03-17",l:"17 Mar 2026",y:2026,t:"China NMPA YY/T 1406-2026",x:"Revised risk management standard integrating functional safety and cybersecurity into a unified framework. Effective 1 Mar 2027.",u:"https://chinameddevice.com/nmpa-software-standard/",tp:["other","cyber"],tg:["new"],v:"n"},
+{d:"2026-04-10",l:"10 Apr 2026",y:2026,t:"MHRA Indefinite CE Mark Recognition \u2014 Consultation Closed",x:"Proposes permanent recognition of CE-marked devices in GB. ~90% of devices on the GB market are CE-marked. Result pending.",u:"https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices",tp:["uk","mdr"],tg:["high"],v:"h"},
+{d:"2026-04-16",l:"16 Apr 2026",y:2026,t:"CNIL/HAS AI Healthcare Guide \u2014 Consultation Closes",x:"Joint guide on AI deployment in healthcare covering acquisition through uninstallation, governance, and generative AI specifics.",u:"https://www.cnil.fr/fr/ia-et-sante-la-has-et-la-cnil-lancent-une-consultation-publique-sur-un-projet-de-guide",tp:["france","ai"],tg:["critical"],v:"h"},
+{d:"2026-05-01",l:"May 2026",y:2026,t:"HIPAA Security Rule Overhaul \u2014 Finalization Target",x:"First major update since 2013. MFA, encryption, network segmentation mandatory. 24-hour incident reporting for business associates.",u:"https://www.hipaajournal.com/new-hipaa-regulations/",tp:["us"],tg:["high"],v:"h"},
+{d:"2026-05-06",l:"6 May 2026",y:2026,t:"MDR/IVDR Simplification \u2014 Feedback Deadline",x:"Proposal 2025/0404: Revised Rule 11 reclassifies most MDSW as Class I by default. Also proposes removing medical devices from AI Act high-risk scope.",u:"https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",tp:["mdr","ai"],tg:["critical"],v:"c"},
+{d:"2026-05-16",l:"16 May 2026",y:2026,t:"HDS v2.0 Mandatory (France)",x:"Only v2.0-certified hosters may legally host health data for third parties. Reinforced EEA-only hosting, stronger ISO 27001 alignment.",u:"https://esante.gouv.fr/produits-services/hds",tp:["france","data"],tg:["critical"],v:"c"},
+{d:"2026-05-22",l:"22 May 2026",y:2026,t:"IEC 62304 Ed.2 \u2014 Approval Phase Begins",x:"Major revision: three safety classes replaced by two Software Process Accuracy Levels. Expanded scope to all health software. AI/ML process planning included.",u:"https://lfhregulatory.co.uk/iec-62304-update-2026/",tp:["standards"],tg:["high"],v:"h"},
+{d:"2026-05-28",l:"28 May 2026",y:2026,t:"EUDAMED \u2014 First 4 Modules Mandatory",x:"Actor Registration, UDI/Device Registration, NB & Certificates, Market Surveillance. All economic operators must have an SRN.",u:"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",tp:["mdr"],tg:["critical"],v:"c"},
+{d:"2026-06-11",l:"11 Jun 2026",y:2026,t:"Cyber Resilience Act \u2014 CAB Notification",x:"Conformity assessment body notification deadline. MD under MDR/IVDR excluded, but peripheral apps and cloud services may be in scope.",u:"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",tp:["cyber"],tg:["medium"],v:"n"},
+{d:"2026-07-01",l:"1 Jul 2026",y:2026,t:"Australia TGA \u2014 UDI Required (Class IIb/III)",x:"UDI requirements for Class IIb and III devices including SaMD begin in Australia.",u:"https://www.tga.gov.au/news/news-articles/medical-device-regulation-changes",tp:["other"],tg:["medium"],v:"n"},
+{d:"2026-08-02",l:"Aug 2026",y:2026,t:"AI Act \u2014 Most Provisions Apply",x:"Original timeline for high-risk AI rules. Digital Omnibus may delay to Dec 2027 (Annex III) or Aug 2028 (Annex I/medical devices). MDR simplification could remove MD from scope entirely.",u:"https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",tp:["ai"],tg:["high"],v:"c"},
+{d:"2026-08-12",l:"12 Aug 2026",y:2026,t:"IEC 62304 Edition 2 \u2014 Expected Publication",x:"Two Software Process Accuracy Levels (I, II) replace Classes A/B/C. Scope expanded to all health software. AI/ML process planning. Aligned with IEC 82304 and IEC 81001.",u:"https://8foldgovernance.com/iec-62304-edition-2-big-changes-in-samd-requirements/",tp:["standards"],tg:["critical"],v:"c"},
+{d:"2026-09-01",l:"Sep 2026",y:2026,t:"NIS2 Directive \u2014 Full Implementation",x:"Complete implementation of basic security measures required. Medical device manufacturers are in scope. Max fines EUR 10M / 2% turnover.",u:"https://cibersafety.com/en/nis2-health-sector-2026/",tp:["cyber"],tg:["high"],v:"h"},
+{d:"2026-09-11",l:"11 Sep 2026",y:2026,t:"CRA \u2014 Vulnerability Reporting Begins",x:"Actively exploited vulnerabilities must be reported to ENISA within 24 hours.",u:"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",tp:["cyber"],tg:["high"],v:"h"},
+{d:"2026-10-01",l:"Q4 2026",y:2026,t:"CEN-CENELEC JTC 21 \u2014 AI Act Harmonised Standards",x:"Target for 10 standards: risk management, data governance, transparency, human oversight, cybersecurity, QMS, conformity assessment, post-market monitoring.",u:"https://jtc21.eu/",tp:["ai","standards"],tg:["high"],v:"n"},
+{d:"2026-10-15",l:"Late 2026",y:2026,t:"prEN 18286 \u2014 AI Act QMS Standard Revised",x:"First harmonised standard for AI Act QMS (Article 17). Failed Jan 2026 vote with 1,288 comments. Under revision since March 2026.",u:"https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for",tp:["ai","standards"],tg:["medium"],v:"n"},
+{d:"2026-11-01",l:"Late 2026",y:2026,t:"UK Pre-Market SI \u2014 SaMD Up-Classification",x:"Second Statutory Instrument: SaMD up-classified to at least Class IIa, mirroring EU MDR. Includes UDI, international reliance scheme.",u:"https://www.gov.uk/government/publications/implementation-of-the-future-regulation-of-medical-devices/implementation-of-the-future-regulations",tp:["uk"],tg:["high"],v:"h"},
+{d:"2026-11-28",l:"28 Nov 2026",y:2026,t:"EUDAMED \u2014 Existing Devices Registration Deadline",x:"All existing devices on the EU market must be registered in EUDAMED by this date.",u:"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",tp:["mdr"],tg:["high"],v:"h"},
+{d:"2026-12-01",l:"Late 2026",y:2026,t:"Health Data Hub \u2192 SecNumCloud",x:"Migration from Azure to SecNumCloud-certified sovereign cloud. Signals de facto standard for health data hosting in France.",u:"https://next.ink/223140/health-data-hub-le-gouvernement-promet-une-bascule-sur-secnumcloud-dici-fin-2026/",tp:["france","data"],tg:["medium"],v:"n"},
+{d:"2026-12-15",l:"Late 2026",y:2026,t:"UK AI Commission \u2014 Healthcare Recommendations",x:"Regulatory rulebook for AI/ML medical devices. Will shape the UK\u2019s bespoke AI medical device framework.",u:"https://www.gov.uk/government/groups/national-commission-into-the-regulation-of-ai-in-healthcare",tp:["uk","ai"],tg:["medium"],v:"n"},
+{d:"2027-01-01",l:"2027",y:2027,t:"Brazil ANVISA \u2014 UDI Phase-In (Class II)",x:"UDI requirements extend to Class II medical devices in Brazil.",u:"https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year",tp:["other"],tg:["medium"],v:"n"},
+{d:"2027-03-01",l:"Mar 2027",y:2027,t:"EHDS \u2014 Implementing Acts Deadline",x:"European Health Data Space implementing acts must be adopted. Framework for cross-border health data exchange.",u:"https://esante.gouv.fr/espace-europeen-donnees-sante",tp:["data","mdr"],tg:["high"],v:"h"},
+{d:"2027-03-01",l:"1 Mar 2027",y:2027,t:"China YY/T 1406-2026 Effective",x:"Unified risk framework (functional safety + cybersecurity) for medical device software becomes mandatory in China.",u:"https://chinameddevice.com/nmpa-software-standard/",tp:["other"],tg:["medium"],v:"n"},
+{d:"2027-05-28",l:"28 May 2027",y:2027,t:"EUDAMED \u2014 NB Retrospective Certificate Registration",x:"Notified bodies must complete retrospective registration of all certificates.",u:"https://health.ec.europa.eu/latest-updates/eudamed-four-first-modules-will-be-mandatory-use-28-may-2026-2025-11-27_en",tp:["mdr"],tg:["medium"],v:"n"},
+{d:"2027-06-01",l:"2027",y:2027,t:"MDR/IVDR Simplification \u2014 Earliest Adoption",x:"Realistic earliest adoption of the simplification proposal including Rule 11 revision and AI Act scope changes.",u:"https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",tp:["mdr","ai"],tg:["high"],v:"c"},
+{d:"2027-12-02",l:"Dec 2027",y:2027,t:"AI Act High-Risk Annex III (If Delayed)",x:"Potential delayed application date for high-risk AI systems in Annex III under the Digital Omnibus proposal.",u:"https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",tp:["ai"],tg:["high"],v:"h"},
+{d:"2027-12-11",l:"11 Dec 2027",y:2027,t:"Cyber Resilience Act \u2014 Full Application",x:"All CRA requirements become fully applicable for products with digital elements.",u:"https://www.twobirds.com/en/insights/2026/cra%E2%80%99s-phased-entry-into-application-starts-in-september-2026",tp:["cyber"],tg:["high"],v:"h"},
+{d:"2028-01-01",l:"2028",y:2028,t:"Brazil ANVISA \u2014 UDI Phase-In (Class I)",x:"UDI requirements extend to Class I devices, completing the full phase-in across all risk classes.",u:"https://www.emergobyul.com/news/brazil-anvisa-announces-priorities-2026-2027-year",tp:["other"],tg:["medium"],v:"n"},
+{d:"2028-06-01",l:"2028\u20132029",y:2028,t:"ISO 13485 \u2014 New Edition Expected",x:"Revision under review since Jan 2025. Expected to include cybersecurity and AI provisions. Current version (2016) remains in force until publication.",u:"https://www.urmconsulting.com/blog/iso-13485-and-beyond-key-updates-shaping-the-medical-device-regulatory-landscape",tp:["standards"],tg:["medium"],v:"h"},
+{d:"2028-08-02",l:"Aug 2028",y:2028,t:"AI Act Annex I / Medical Devices (If Delayed)",x:"Potential delayed application for AI systems covered under EU harmonisation legislation including medical devices.",u:"https://petrieflom.law.harvard.edu/2026/03/05/simplification-or-back-to-square-one-the-future-of-eu-medical-ai-regulation/",tp:["ai","mdr"],tg:["critical"],v:"c"},
+{d:"2028-12-31",l:"Dec 2028",y:2028,t:"UK MHRA \u2014 MDD Transitional Period End",x:"Devices under old EU MDD must transition. Extended to Dec 2028 under the CE recognition proposal.",u:"https://www.gov.uk/government/news/mhra-launches-a-consultation-on-indefinite-recognition-of-ce-marked-medical-devices",tp:["uk","mdr"],tg:["high"],v:"h"},
+{d:"2029-03-01",l:"Mar 2029",y:2029,t:"EHDS \u2014 Primary Use Provisions Apply",x:"Patient Summaries and ePrescriptions provisions become applicable across the EU.",u:"https://esante.gouv.fr/espace-europeen-donnees-sante",tp:["data","mdr"],tg:["high"],v:"c"},
+{d:"2030-01-01",l:"2030",y:2030,t:"EU MDR/IVDR Full Maturity",x:"All transitional periods expired. Full EUDAMED functionality. Harmonised standards for AI Act expected to be stable.",u:"https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",tp:["mdr","ai"],tg:["medium"],v:"n"},
+{d:"2030-06-01",l:"2030",y:2030,t:"WHO Digital Health Strategy 2028\u20132033 Mid-Term",x:"Mid-point of the successor WHO strategy currently under global consultation.",u:"https://www.who.int/news-room/events/detail/2026/04/01/default-calendar/shaping-the-next-global-strategy-on-digital-health-(2028-2033)-global-stakeholder-consultation",tp:["other"],tg:["medium"],v:"n"}
+];
+
+M.sort((a,b)=>new Date(a.d)-new Date(b.d));
+
+// Back-office visibility: read hidden card IDs from localStorage
+function getHiddenCards(){
+  try { return new Set(JSON.parse(localStorage.getItem("rw_hidden_cards")||"[]")); }
+  catch(e){ return new Set(); }
+}
+function cardId(m){ return m.d+"__"+m.t.slice(0,40).replace(/\W+/g,"_"); }
+
+const TL={mdr:"EU MDR/IVDR",ai:"AI Act",standards:"Standards",cyber:"Cybersecurity",france:"France",uk:"UK",us:"US (FDA)",other:"Other Regions",data:"Data / EHDS"};
+const TG={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM","new":"NEW","in-force":"IN FORCE",draft:"DRAFT",proposed:"PROPOSED"};
+
+/*
+  3-state filter logic:
+  - State "all": default, everything shown
+  - Click a topic: state "include" — only that topic shown (active class)
+  - Click again: state "exclude" — everything EXCEPT that topic (excluded class)
+  - Click again: back to "all"
+
+  Multiple topics can be in include or exclude simultaneously.
+  "include" takes priority: if ANY topic is included, only included topics show.
+  If only excludes exist, everything shows except excluded topics.
+*/
+const included = new Set();  // topics to show exclusively
+const excluded = new Set();  // topics to hide
+
+function getState(topic) {
+  if (included.has(topic)) return "include";
+  if (excluded.has(topic)) return "exclude";
+  return "off";
+}
+
+function cycleState(topic) {
+  const s = getState(topic);
+  if (s === "off") {
+    included.add(topic);
+  } else if (s === "include") {
+    included.delete(topic);
+    excluded.add(topic);
+  } else {
+    excluded.delete(topic);
+  }
+}
+
+function isAllDefault() {
+  return included.size === 0 && excluded.size === 0;
+}
+
+function isVis(m) {
+  // Back-office override: hidden cards never show
+  if (getHiddenCards().has(cardId(m))) return false;
+  if (isAllDefault()) return true;
+  if (included.size > 0) {
+    return m.tp.some(t => included.has(t));
+  }
+  // any excluded topic on the card hides it entirely
+  if (m.tp.some(t => excluded.has(t))) return false;
+  return true;
+}
+
+function syncButtons() {
+  const allBtn = document.querySelector(".filter-btn-all");
+  allBtn.classList.toggle("active", isAllDefault());
+
+  document.querySelectorAll(".filter-btn:not(.filter-btn-all)").forEach(btn => {
+    const t = btn.dataset.topic;
+    btn.classList.remove("active", "excluded");
+    if (included.has(t)) btn.classList.add("active");
+    else if (excluded.has(t)) btn.classList.add("excluded");
+  });
+}
+
+function render() {
+  const el = document.getElementById("tl");
+  const years = [...new Set(M.map(m => m.y))].sort();
+  let html = "", vis = 0, urg = 0;
+
+  years.forEach(yr => {
+    const ym = M.filter(m => m.y === yr);
+    const shown = ym.filter(isVis);
+    if (!shown.length) return;
+
+    html += `<section class="year-section"><div class="year-header"><span class="year-label">${yr}</span><span class="year-count">${shown.length} milestone${shown.length !== 1 ? "s" : ""}</span></div><hr class="year-rule"><div class="tl-grid">`;
+
+    ym.forEach(m => {
+      const ok = isVis(m);
+      if (ok) { vis++; if (m.tg.includes("critical") || m.tg.includes("high")) urg++; }
+      const cls = m.v === "c" ? "ms--critical" : m.v === "h" ? "ms--highlight" : "";
+      html += `<div class="ms ${cls} ${ok ? "" : "hidden"}" data-topics="${m.tp.join(",")}" data-lead="${m.tp[0]}">`;
+      html += `<div class="ms-date">${m.l}</div>`;
+      html += `<div class="ms-body">`;
+      html += `<div class="ms-tags">${m.tg.map(g => `<span class="ms-tag tag-${g}">${TG[g] || g}</span>`).join("")}</div>`;
+      html += `<div class="ms-title">${m.u ? `<a href="${m.u}" target="_blank" rel="noopener">${m.t}</a>` : m.t}</div>`;
+      html += `<div class="ms-desc">${m.x}</div>`;
+      html += `<div class="ms-topics">${m.tp.map(p => `<span class="tp tp-${p}">${TL[p] || p}</span>`).join("")}</div>`;
+      html += `</div></div>`;
+    });
+    html += `</div></section>`;
+  });
+
+  el.innerHTML = html;
+  document.getElementById("s-total").textContent = M.length;
+  document.getElementById("s-visible").textContent = vis;
+  document.getElementById("s-urgent").textContent = urg;
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if (!btn) return;
+  const t = btn.dataset.topic;
+
+  if (t === "all") {
+    // Reset everything
+    included.clear();
+    excluded.clear();
+  } else {
+    cycleState(t);
+  }
+
+  syncButtons();
+  render();
+});
+
+syncButtons();
+render();
+</script>
+</body>
+</html>
