@@ -92,11 +92,6 @@
     color: oklch(98% 0.005 90);
     line-height: 1.2;
   }
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
   .header-meta {
     font-size: 0.6875rem;
     font-weight: 500;
@@ -112,12 +107,6 @@
     margin-right: 6px;
     vertical-align: middle;
   }
-  .header-admin {
-    color: oklch(55% 0.01 260);
-    transition: color 0.15s;
-    display: flex;
-  }
-  .header-admin:hover { color: var(--gold); }
 
   /* ===== LAYOUT: sidebar + content ===== */
   .page-layout {
@@ -480,12 +469,7 @@
       <img src="https://cdn.prod.website-files.com/6850272ec839a090ed996f46/68c98307d72aef67f50014d9_68c905ee252fff8d68ba2807_logo-healthtech.svg" alt="Theodo HealthTech" class="header-logo">
       <h1>MDSW Regulatory Timeline 2026&ndash;2030</h1>
     </div>
-    <div class="header-right">
-      <span class="header-meta">Updated 16 April 2026</span>
-      <a href="regulatory-timeline-admin.html" class="header-admin" title="Back office">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 1.5h3l.4 1.8.7.3 1.6-.8 2.1 2.1-.8 1.6.3.7 1.8.4v3l-1.8.4-.3.7.8 1.6-2.1 2.1-1.6-.8-.7.3-.4 1.8h-3l-.4-1.8-.7-.3-1.6.8-2.1-2.1.8-1.6-.3-.7L.4 9.5v-3l1.8-.4.3-.7-.8-1.6 2.1-2.1 1.6.8.7-.3.4-1.8z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
-      </a>
-    </div>
+    <span class="header-meta">Updated 16 April 2026</span>
   </div>
 </header>
 
