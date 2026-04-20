@@ -2,108 +2,148 @@
 
 ## Overview
 
-The Compliance Timeline is a regulatory watch system for Medical Device Software (MDSW) manufacturers. It consists of three subsystems:
+The Compliance Timeline is a bilingual (EN/FR) regulatory watch system for Medical Device Software (MDSW) manufacturers. It consists of three subsystems:
 
-1. **Public Timeline** — An interactive web page displaying regulatory milestones from 2026 to 2030
-2. **Back Office** — An admin interface for managing card visibility, comments, and reviewing AI-generated proposals
-3. **Automated Regulatory Watch** — A weekly cron job that researches regulatory changes, sends a branded email report, and proposes timeline updates
+1. **Public Timeline** — Two interactive web pages (English + French) displaying regulatory milestones from 2026 to 2030
+2. **Back Office** — A single admin interface managing both languages: card visibility, bilingual comments, and AI-generated proposal review
+3. **Automated Regulatory Watch** — A weekly cron job that researches regulatory changes, sends a branded email report, and generates bilingual timeline update proposals
 
-All three subsystems share data through a Git repository hosted on GitHub, deployed as a static site via GitHub Pages, with browser-local state managed through localStorage.
+All three subsystems share data through a Git repository hosted on GitHub, deployed as a static site via GitHub Pages, with browser-local state managed through localStorage on a single origin.
 
 ---
 
 ## System Architecture
 
+See diagram: `system-overview.png`
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    macOS (local machine)                     │
 │                                                             │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  launchd Agent (com.theodo.regulatory-watch)         │   │
-│  │  Triggers: Every Friday 08:00 CET                    │   │
-│  │  Runs: ~/.claude/regulatory-watch/run.sh             │   │
-│  └──────────────┬───────────────────────────────────────┘   │
-│                 │                                            │
-│                 ▼                                            │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  Claude Code CLI (--print --dangerously-skip-perms)  │   │
-│  │  Prompt: ~/.claude/regulatory-watch/prompt.md        │   │
-│  │                                                      │   │
-│  │  1. WebSearch + WebFetch (12 sources, 21 queries)    │   │
-│  │  2. Build HTML email (Theodo HealthTech branding)    │   │
-│  │  3. Send via gws gmail CLI                           │   │
-│  │  4. Read data.json, generate proposals.json          │   │
-│  │  5. git push to GitHub                               │   │
-│  └──────┬──────────────────┬────────────────────────────┘   │
-│         │                  │                                 │
-│         ▼                  ▼                                 │
-│   ┌──────────┐    ┌──────────────────┐                      │
-│   │ gws CLI  │    │ Git repo (local) │                      │
-│   │ (Gmail)  │    │ ~/.claude/       │                      │
-│   └──────────┘    │  regulatory-     │                      │
-│         │         │  watch/repo/     │                      │
-│         ▼         └────────┬─────────┘                      │
-│   5 recipients             │                                 │
-│   @theodo.com              │ git push                        │
-└────────────────────────────┼────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────┐
-│                         GitHub                               │
+│  launchd Agent (com.theodo.regulatory-watch)                │
+│  Triggers: Every Friday 08:00 CET                           │
+│  Runs: ~/.claude/regulatory-watch/run.sh                    │
+│                     │                                       │
+│                     ▼                                       │
+│  Claude Code CLI (--print --dangerously-skip-permissions)   │
+│  Prompt: ~/.claude/regulatory-watch/prompt.md               │
 │                                                             │
-│  nicolasbertrand-QARA/Compliance-timeline (main branch)     │
-│  ├── index.html          (public timeline)                  │
-│  ├── admin.html          (back office)                      │
-│  ├── data.json           (milestone data, source of truth)  │
-│  ├── proposals.json      (AI-generated change proposals)    │
-│  ├── logo.png            (Theodo HealthTech logo)           │
-│  ├── reports/            (archived markdown reports)        │
-│  ├── automation/         (cron prompt + shell script)       │
+│  Steps 1-3: WebSearch + WebFetch (12 sources, 21 queries)   │
+│  Step 4:    Build HTML email → gws gmail → 5 recipients     │
+│  Step 5a:   git pull repo                                   │
+│  Step 5b-d: Read data.json, generate proposals.json (EN)    │
+│  Step 5e:   Generate proposals-fr.json (FR translations)    │
+│  Step 5f:   git push proposals.json + proposals-fr.json     │
+└────────────────────────┬────────────────────────────────────┘
+                         │ git push
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│  GitHub: nicolasbertrand-QARA/Compliance-timeline           │
+│  ├── index.html         (EN timeline)                       │
+│  ├── fr.html            (FR timeline)                       │
+│  ├── admin.html         (back office, manages both langs)   │
+│  ├── data.json          (EN milestones, 37 cards)           │
+│  ├── data-fr.json       (FR milestones, 37 cards)           │
+│  ├── proposals.json     (EN proposals from cron)            │
+│  ├── proposals-fr.json  (FR proposals from cron)            │
+│  ├── logo.png           (Theodo HealthTech logo)            │
+│  ├── *.png              (Mermaid architecture diagrams)     │
+│  ├── reports/           (archived markdown reports)         │
+│  ├── automation/        (cron prompt + shell script)        │
 │  └── .github/workflows/pages.yml                            │
 │                                                             │
-│  GitHub Actions: Deploy to GitHub Pages on push to main     │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
+│  GitHub Actions: Deploy to Pages on push to main            │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                     GitHub Pages (CDN)                        │
-│                                                             │
-│  nicolasbertrand-qara.github.io/Compliance-timeline/        │
-│  ├── /              → index.html (public timeline)          │
-│  ├── /admin.html    → back office                           │
-│  ├── /data.json     → fetched by both pages at runtime      │
-│  └── /proposals.json → fetched by both pages at runtime     │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
+│  GitHub Pages: nicolasbertrand-qara.github.io/              │
+│                Compliance-timeline/                          │
+│  ├── /             → EN timeline                            │
+│  ├── /fr.html      → FR timeline                            │
+│  ├── /admin.html   → back office                            │
+│  ├── /data.json        ← fetched by EN + admin              │
+│  ├── /data-fr.json     ← fetched by FR                      │
+│  ├── /proposals.json   ← fetched by EN + admin              │
+│  └── /proposals-fr.json← fetched by FR                      │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    User's Browser                            │
+│  User's Browser — localStorage (shared origin)              │
 │                                                             │
-│  localStorage (same origin: *.github.io/Compliance-timeline)│
-│  ├── rw_hidden_cards        (card IDs hidden from timeline) │
-│  ├── rw_approved_proposals  (approved proposal IDs)         │
-│  ├── rw_rejected_proposals  (rejected proposal IDs)         │
-│  ├── rw_deleted_cards       (card IDs from delete proposals)│
-│  └── rw_comments            (cardId → comment text map)     │
+│  Shared across EN + FR (approval is "two birds one stone"): │
+│  ├── rw_hidden_cards         (card IDs hidden on both)      │
+│  ├── rw_approved_proposals   (approved proposal IDs)        │
+│  ├── rw_rejected_proposals   (rejected proposal IDs)        │
+│  └── rw_deleted_cards        (deleted card IDs)             │
+│                                                             │
+│  Language-specific (separate comment per language):          │
+│  ├── rw_comments             (EN cardId → comment)          │
+│  └── rw_comments_fr          (FR cardId → comment)          │
+│                                                             │
+│  Migration flag:                                            │
+│  └── rw_migrated_to_stable_ids (version number)             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
+## Bilingual Architecture
+
+The EN and FR timelines are parallel but share a single admin workflow:
+
+### What's shared (one action applies to both languages)
+- **Card visibility** (`rw_hidden_cards`) — hide a card once, hidden on both EN and FR
+- **Proposal approval/rejection** (`rw_approved_proposals`, `rw_rejected_proposals`) — approve once in admin, the approved card appears on both timelines (in the correct language)
+- **Card deletion** (`rw_deleted_cards`) — delete once, gone from both
+- **Stable card IDs** — every card has an `id` field (e.g. `2026-05-28--eudamed-first-4-modules-mandatory`) that is identical in `data.json` and `data-fr.json`
+
+### What's separate per language
+- **Data files** — `data.json` (English content) and `data-fr.json` (French content), same structure and same `id` fields
+- **Proposal files** — `proposals.json` (English) and `proposals-fr.json` (French), same proposal IDs and card IDs, different title/description/date labels
+- **Comments** — `rw_comments` (EN) and `rw_comments_fr` (FR), managed via two text inputs per row in the back office
+
+### How approval works across languages
+
+```
+User approves proposal "proposal-2026-04-25-001" in admin
+         │
+         ├──→ EN timeline loads proposals.json
+         │    finds "proposal-2026-04-25-001"
+         │    merges the English card into the view
+         │
+         └──→ FR timeline loads proposals-fr.json
+              finds "proposal-2026-04-25-001" (same ID!)
+              merges the French card into the view
+```
+
+### Stable ID Convention
+
+All card IDs use the format: `{YYYY-MM-DD}--{lowercase-english-slug}`
+
+- Double dash `--` separator (not double underscore)
+- Derived from the English title, max 50 chars
+- Generated once, never changes
+- Same ID in `data.json`, `data-fr.json`, `proposals.json`, `proposals-fr.json`
+- The `cardId()` function in JS returns `m.id` when present, falling back to the legacy `date__title_slug` format
+
+---
+
 ## Component Details
 
-### 1. Public Timeline (`index.html`)
+### 1. English Timeline (`index.html`)
 
-**Purpose:** Display regulatory milestones in a filterable, interactive timeline for MDSW stakeholders.
+**URL:** `https://nicolasbertrand-qara.github.io/Compliance-timeline/`
 
 **Data flow on page load:**
 ```
-fetch(data.json) → base milestones
-fetch(proposals.json) → pending proposals
-localStorage(rw_approved_proposals) → approved IDs
+fetch(data.json) → 37 base milestones (EN)
+fetch(proposals.json) → pending proposals (EN)
+localStorage(rw_approved_proposals) → approved proposal IDs
 localStorage(rw_deleted_cards) → deleted card IDs
 localStorage(rw_hidden_cards) → hidden card IDs
-localStorage(rw_comments) → card comments
+localStorage(rw_comments) → EN comments
 
 Displayed = (base - deleted + approved_adds/updates) - hidden
 ```
@@ -117,55 +157,78 @@ Displayed = (base - deleted + approved_adds/updates) - hidden
   - "Other Regions" excluded by default
 - **Card variants:** Critical (navy background), Highlight (gold background), Normal (plain)
 - **Comments:** Displayed inline as `"comment text"  Nicolas Bertrand`
-- **Source links:** All card titles are hyperlinks to source URLs
+- **Source links:** All card titles are hyperlinks with subtle underline (grey at rest, gold on hover)
 - **Staggered entrance animation** with 40ms per card (capped at 500ms), respects `prefers-reduced-motion`
 - **Keyboard accessible:** `:focus-visible` gold ring on all interactive elements
+- **One-time migration script** clears legacy localStorage keys on first visit after ID system changes
 
 **Technology:** Vanilla HTML/CSS/JS. No build step. Poppins font (Google Fonts). OKLCH color system tinted toward HealthTech yellow hue (90).
 
-**Card ID convention:** `{date}__{title_slug_first_40_chars}` — used across all components as the stable identifier.
+### 2. French Timeline (`fr.html`)
 
-### 2. Back Office (`admin.html`)
+**URL:** `https://nicolasbertrand-qara.github.io/Compliance-timeline/fr.html`
 
-**Purpose:** Admin interface for curating the public timeline.
+Identical structure and features to the English timeline, with these differences:
+
+| Aspect | English (`index.html`) | French (`fr.html`) |
+|--------|----------------------|-------------------|
+| Data file | `data.json` | `data-fr.json` |
+| Proposals file | `proposals.json` | `proposals-fr.json` (falls back to `proposals.json`) |
+| Comments key | `rw_comments` | `rw_comments_fr` |
+| UI labels | English (Topics, Showing, milestones...) | French (Thèmes, Affichés, jalons...) |
+| Tag labels | CRITICAL, HIGH, IN FORCE... | CRITIQUE, ÉLEVÉ, EN VIGUEUR... |
+| Topic labels | Standards, Cybersecurity, Other Regions... | Normes, Cybersécurité, Autres régions... |
+| Page title | MDSW Regulatory Timeline 2026–2030 | Timeline Réglementaire MDSW 2026–2030 |
+
+All admin decisions (hide, approve, reject, delete) are shared via the same localStorage keys.
+
+### 3. Back Office (`admin.html`)
+
+**URL:** `https://nicolasbertrand-qara.github.io/Compliance-timeline/admin.html`
+
+**Purpose:** Single admin interface managing both EN and FR timelines.
 
 **Three functional areas:**
 
 #### A. Proposals (tabbed)
-- **Pending tab:** Unreviewed proposals with Approve/Reject buttons
-- **Archived tab:** Decided proposals with status badge and Undo button
+- **Pending tab:** Unreviewed proposals with Approve/Reject buttons. Count badge shows remaining.
+- **Archived tab:** Decided proposals with status badge (Approved/Rejected) and Undo button.
 - Proposal types: ADD (green), UPDATE (amber), DELETE (red)
 - UPDATE proposals show a diff view (old → new for each changed field)
-- Each proposal includes a `reason` field explaining why it was suggested
+- Each proposal includes a `reason` field explaining why the cron suggested it
+- One approval/rejection applies to both EN and FR timelines
 
 #### B. Milestones Table
-- Toggle switches to show/hide each card on the public timeline
+- Toggle switches to show/hide each card (applies to both languages)
 - Search bar filtering by title, description, or topic
 - "Show all" / "Hide all" bulk actions
 - NEW/UPDATED indicators on cards from approved proposals
 
-#### C. Comments Column
-- Inline text input per milestone row
+#### C. Bilingual Comments Column
+- **Two text inputs per milestone row:**
+  - Top: `Add an EN comment...` → saves to `rw_comments`
+  - Bottom: `Commentaire en FR...` → saves to `rw_comments_fr`
 - Saves on blur or Enter keypress
-- Empty comment = no display on public page
+- EN comment appears on English timeline, FR comment on French timeline
+- Empty comment = nothing displayed
 
-**State persistence:** All admin decisions are stored in localStorage on the same GitHub Pages origin, immediately reflected on the public timeline.
+**State persistence:** All admin decisions stored in localStorage on the same GitHub Pages origin. Approval, rejection, hide, and delete decisions are shared across languages. Comments are per-language.
 
-### 3. Automated Regulatory Watch
+### 4. Automated Regulatory Watch
 
 **Trigger:** macOS launchd agent, every Friday at 08:00 CET.
 
 **Execution chain:**
 ```
-launchd → run.sh → claude CLI → (research + email + proposals + git push)
+launchd → run.sh → claude CLI → (research + email + proposals EN/FR + git push)
 ```
 
 **Components:**
 
 | File | Location | Purpose |
 |------|----------|---------|
-| `com.theodo.regulatory-watch.plist` | `~/Library/LaunchAgents/` | launchd schedule definition |
-| `run.sh` | `~/.claude/regulatory-watch/` | Shell wrapper, sets env vars, invokes Claude CLI |
+| `com.theodo.regulatory-watch.plist` | `~/Library/LaunchAgents/` | launchd schedule (Friday 8am, 4h catch-up) |
+| `run.sh` | `~/.claude/regulatory-watch/` | Shell wrapper, env vars, invokes Claude CLI |
 | `prompt.md` | `~/.claude/regulatory-watch/` | Full prompt defining the 5-step workflow |
 | `repo/` | `~/.claude/regulatory-watch/` | Persistent local clone of the GitHub repo |
 | `last_run.log` | `~/.claude/regulatory-watch/` | Output log of the most recent run |
@@ -174,9 +237,15 @@ launchd → run.sh → claude CLI → (research + email + proposals + git push)
 
 1. **Research** — Fetch 12 primary web sources + 21 targeted web searches covering EU MDR/IVDR, AI Act, standards (IEC/ISO), cybersecurity (CRA, NIS2), France (CNIL, ANSM, HDS), UK (MHRA), US (FDA, HIPAA), and other regions
 2. **Organize** — Structure findings into 4 sections (EU & International, UK, US, Other Regions) with newly issued items, in-progress items, evolutions, and impact opinions
-3. **Standards check** — Monitor 25+ standards from the company register (DOC-POL-XXX v01) for any changes
-4. **Email** — Build a Theodo HealthTech branded HTML email and send to 5 recipients via `gws gmail`
-5. **Timeline update** — Pull the repo, compare research findings with existing `data.json`, generate `proposals.json` with ADD/UPDATE/DELETE proposals, push to GitHub
+3. **Standards check** — Monitor 25+ standards from the company register (DOC-POL-XXX v01)
+4. **Email** — Build Theodo HealthTech branded HTML email, send to 5 recipients via `gws gmail`
+5. **Timeline update:**
+   - 5a: `git pull` the repo
+   - 5b: Read `data.json` (existing milestones with stable IDs)
+   - 5c: Generate proposals comparing research vs existing data. Each proposal card must include a `card.id` field in `YYYY-MM-DD--english-slug` format. `existing_id` for update/delete must match the `id` field from data.json.
+   - 5d: Write `proposals.json` (English)
+   - 5e: Write `proposals-fr.json` (French translations of the same proposals, identical `id`, `card.id`, `existing_id` fields, translated `card.t`, `card.x`, `card.l`)
+   - 5f: `git push` both files
 
 **Email recipients:** nicolas.bertrand, thomas.walter, clemence.faulcon, manon.thiberge, louise.balague @theodo.com
 
@@ -184,20 +253,23 @@ launchd → run.sh → claude CLI → (research + email + proposals + git push)
 
 ## Data Model
 
-### `data.json` — Milestones (source of truth)
+### `data.json` / `data-fr.json` — Milestones (source of truth)
+
+Both files contain the same 37 milestones with identical `id` fields. Content differs by language.
 
 ```json
 [
   {
-    "d": "2026-05-28",        // ISO date for sorting
-    "l": "28 May 2026",       // Human-readable date label
-    "y": 2026,                // Year (for grouping)
-    "t": "EUDAMED — First 4 Modules Mandatory",  // Title
-    "x": "Description text...",                    // Description
-    "u": "https://source-url",                     // Source URL
-    "tp": ["mdr"],            // Topics (1 or more)
-    "tg": ["critical"],       // Tags (priority/status)
-    "v": "c"                  // Visual variant: c=critical, h=highlight, n=normal
+    "id": "2026-05-28--eudamed-first-4-modules-mandatory",
+    "d": "2026-05-28",
+    "l": "28 May 2026",           // EN: "28 May 2026" / FR: "28 mai 2026"
+    "y": 2026,
+    "t": "EUDAMED — First 4...",  // EN title / FR title
+    "x": "Description...",        // EN desc / FR desc
+    "u": "https://source-url",    // Same in both
+    "tp": ["mdr"],                // Same in both
+    "tg": ["critical"],           // Same in both
+    "v": "c"                      // Same in both
   }
 ]
 ```
@@ -207,18 +279,28 @@ launchd → run.sh → claude CLI → (research + email + proposals + git push)
 - `tg` (tags): `critical`, `high`, `medium`, `new`, `in-force`, `draft`, `proposed`
 - `v` (variant): `c` (navy card), `h` (gold card), `n` (plain)
 
-### `proposals.json` — AI-Generated Change Proposals
+### `proposals.json` / `proposals-fr.json` — AI-Generated Change Proposals
+
+Both files have the same structure and identical proposal IDs. Card content differs by language.
 
 ```json
 {
-  "generated": "2026-04-18",
+  "generated": "2026-04-25",
   "proposals": [
     {
-      "id": "proposal-2026-04-18-001",
+      "id": "proposal-2026-04-25-001",        // Same in EN and FR
       "action": "add|update|delete",
-      "reason": "Explanation based on this week's research",
-      "card": { /* same shape as data.json entry */ },
-      "existing_id": "date__title_slug"  // only for update/delete
+      "reason": "Explanation (English in both files)",
+      "card": {
+        "id": "2026-04-25--some-english-slug", // Same in EN and FR
+        "d": "2026-04-25",
+        "l": "25 Apr 2026",                    // EN label / FR label
+        "t": "English Title",                  // EN title / FR title
+        "x": "English description",            // EN desc / FR desc
+        ...
+      },
+      "existing_id": "2026-05-28--eudamed-first-4-modules-mandatory"
+                      // For update/delete: stable ID from data.json
     }
   ]
 }
@@ -226,13 +308,15 @@ launchd → run.sh → claude CLI → (research + email + proposals + git push)
 
 ### localStorage Keys
 
-| Key | Type | Used By | Purpose |
-|-----|------|---------|---------|
-| `rw_hidden_cards` | `string[]` (card IDs) | Timeline + Admin | Cards hidden from public view |
-| `rw_approved_proposals` | `string[]` (proposal IDs) | Timeline + Admin | Approved proposals to apply |
-| `rw_rejected_proposals` | `string[]` (proposal IDs) | Admin | Rejected proposals (archived) |
-| `rw_deleted_cards` | `string[]` (card IDs) | Timeline + Admin | Cards removed via approved delete proposals |
-| `rw_comments` | `object` (cardId → string) | Timeline + Admin | User comments displayed on cards |
+| Key | Type | Shared? | Used By | Purpose |
+|-----|------|---------|---------|---------|
+| `rw_hidden_cards` | `string[]` (stable IDs) | EN + FR | All 3 pages | Cards hidden from both timelines |
+| `rw_approved_proposals` | `string[]` (proposal IDs) | EN + FR | All 3 pages | Approved proposals applied to both |
+| `rw_rejected_proposals` | `string[]` (proposal IDs) | EN + FR | Admin | Rejected proposals (archived tab) |
+| `rw_deleted_cards` | `string[]` (stable IDs) | EN + FR | All 3 pages | Cards removed from both timelines |
+| `rw_comments` | `object` (stableId → string) | EN only | EN + Admin | English comments |
+| `rw_comments_fr` | `object` (stableId → string) | FR only | FR + Admin | French comments |
+| `rw_migrated_to_stable_ids` | `string` (version) | All | All 3 pages | One-time migration flag |
 
 ---
 
@@ -240,17 +324,28 @@ launchd → run.sh → claude CLI → (research + email + proposals + git push)
 
 **Hosting:** GitHub Pages (static site, no server)
 
-**Deployment trigger:** Any push to `main` branch triggers the GitHub Actions workflow (`.github/workflows/pages.yml`) which uploads all files as a Pages artifact.
+**Deployment trigger:** Any push to `main` branch triggers the GitHub Actions workflow (`.github/workflows/pages.yml`).
 
 **URL structure:**
-- Public: `https://nicolasbertrand-qara.github.io/Compliance-timeline/`
-- Admin: `https://nicolasbertrand-qara.github.io/Compliance-timeline/admin.html`
+- English timeline: `https://nicolasbertrand-qara.github.io/Compliance-timeline/`
+- French timeline: `https://nicolasbertrand-qara.github.io/Compliance-timeline/fr.html`
+- Back office: `https://nicolasbertrand-qara.github.io/Compliance-timeline/admin.html`
 
-**Update flow:**
+**Weekly update flow:**
 ```
-Cron pushes proposals.json → GitHub Actions deploys → 
-User opens admin → reviews proposals → 
-localStorage updated → Timeline reflects changes immediately
+Friday 8am: Cron runs
+  → Sends email to 5 recipients
+  → Pushes proposals.json + proposals-fr.json to GitHub
+  → GitHub Actions deploys to Pages
+
+User opens admin.html
+  → Sees proposals in "Pending" tab
+  → Approves/rejects each proposal
+  → Decision stored in localStorage (one action, both languages)
+
+User visits EN timeline → sees approved EN cards + EN comments
+User visits FR timeline → sees approved FR cards + FR comments
+Both timelines respect the same hide/delete decisions
 ```
 
 ---
@@ -266,7 +361,7 @@ localStorage updated → Timeline reflects changes immediately
 | Orange (secondary) | `oklch(62% 0.22 30)` / `#ff512c` | Used sparingly as secondary accent |
 | Neutrals | Tinted toward hue 90 (yellow) | Surfaces, borders, text |
 
-**Typography:** Poppins (Google Fonts). Weight 500 for headings, 400 for body. Matches the Theodo HealthTech website.
+**Typography:** Poppins (Google Fonts). Weight 500 for headings, 400 for body.
 
 **Logo:** White "theodo." + gold "HealthTech" on transparent background (`logo.png`), cropped from official brand asset.
 
@@ -280,6 +375,8 @@ localStorage updated → Timeline reflects changes immediately
 - Minimum 12px text size
 - `font-variant-numeric: tabular-nums` on data
 - `max-width: 65ch` on descriptions
+- Staggered entrance animation (ease-out-expo, capped at 500ms)
+- Hover transitions use ease-in-out for state toggles
 
 ---
 
@@ -287,31 +384,40 @@ localStorage updated → Timeline reflects changes immediately
 
 ```
 Repository: nicolasbertrand-QARA/Compliance-timeline
-├── index.html                     # Public timeline (717 lines)
-├── admin.html                     # Back office (1058 lines)
-├── data.json                      # 37 milestones (source of truth)
-├── proposals.json                 # AI-generated proposals (updated weekly)
+├── index.html                     # EN timeline
+├── fr.html                        # FR timeline
+├── admin.html                     # Back office (manages both languages)
+├── data.json                      # 37 EN milestones (source of truth)
+├── data-fr.json                   # 37 FR milestones (same IDs as data.json)
+├── proposals.json                 # EN proposals (updated weekly by cron)
+├── proposals-fr.json              # FR proposals (same IDs as proposals.json)
 ├── logo.png                       # Theodo HealthTech logo (transparent bg)
+├── system-overview.png            # Architecture diagram (Mermaid)
+├── data-flow.png                  # Data flow diagram (Mermaid)
+├── merge-logic.png                # Timeline merge logic diagram (Mermaid)
+├── proposal-lifecycle.png         # Proposal state diagram (Mermaid)
+├── file-map.png                   # File map diagram (Mermaid)
+├── ARCHITECTURE.md                # This document
 ├── reports/
 │   └── April_2026.md              # First full regulatory watch report
 ├── automation/
-│   ├── weekly-report-prompt.md    # Claude CLI prompt (5-step workflow)
-│   └── run.sh                     # Shell wrapper for launchd
+│   ├── weekly-report-prompt.md    # Claude CLI prompt (copy of active prompt)
+│   └── run.sh                     # Shell wrapper (copy of active script)
 └── .github/
     └── workflows/
         └── pages.yml              # GitHub Pages deployment
 
 Local only (not in repo):
 ~/.claude/regulatory-watch/
-├── prompt.md                      # Active prompt (source, copied to repo)
+├── prompt.md                      # Active prompt (source of truth for cron)
 ├── run.sh                         # Active shell script
-├── repo/                          # Persistent local clone
+├── repo/                          # Persistent local git clone
 ├── last_run.log                   # Latest run output
 ├── launchd_stdout.log             # launchd stdout
 └── launchd_stderr.log             # launchd stderr
 
 ~/Library/LaunchAgents/
-└── com.theodo.regulatory-watch.plist  # launchd schedule
+└── com.theodo.regulatory-watch.plist  # launchd schedule definition
 ```
 
 ---
@@ -320,12 +426,16 @@ Local only (not in repo):
 
 1. **localStorage is per-browser, per-device.** Admin decisions (hide/show, comments, proposal approvals) do not sync across browsers or devices. Only one person should manage the back office, or decisions will diverge.
 
-2. **No authentication.** The admin page is publicly accessible at `/admin.html`. Security through obscurity only. Consider adding basic auth or moving to a private repo if sensitive.
+2. **No authentication.** The admin page is publicly accessible at `/admin.html`. Security through obscurity only.
 
 3. **Cron requires Mac to be on.** The launchd agent only fires when the Mac is powered on and the user is logged in. `StartCalendarIntervalAllowedDelay` allows a 4-hour catch-up window after sleep/wake.
 
 4. **gws auth token expiration.** The `gws` CLI OAuth token may expire or require re-authentication (RAPT challenges). If the email step fails, the rest of the workflow (proposals) still completes.
 
-5. **Proposal accumulation.** `proposals.json` is overwritten each week. Old proposals that were neither approved nor rejected are lost when the next batch is generated. The archived tab preserves decisions in localStorage but the proposal details are gone once `proposals.json` is replaced.
+5. **Proposal accumulation.** `proposals.json` and `proposals-fr.json` are overwritten each week. Old proposals that were neither approved nor rejected are lost when the next batch is generated. The archived tab preserves decisions in localStorage but the proposal details are gone once the JSON is replaced.
 
-6. **Single-font design.** Impeccable guidelines recommend font pairing, but the Theodo HealthTech brand exclusively uses Poppins. This is an acknowledged brand-compliance exception.
+6. **Single-font design.** Impeccable guidelines recommend font pairing, but the Theodo HealthTech brand exclusively uses Poppins. Acknowledged brand-compliance exception.
+
+7. **Comments are per-language but not enforced.** A user can add an EN comment without a FR comment (or vice versa). The back office shows both fields but doesn't require both to be filled.
+
+8. **Migration script versioning.** The `rw_migrated_to_stable_ids` flag uses a version number. Any future schema change to localStorage requires bumping this version to force a re-migration, which clears all user decisions. This is a destructive operation.
