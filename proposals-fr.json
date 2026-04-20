@@ -1,4 +1,202 @@
 {
   "generated": "2026-04-17",
-  "proposals": []
+  "proposals": [
+    {
+      "id": "proposal-2026-04-17-001",
+      "action": "add",
+      "reason": "EU Commission announced pilot programme for breakthrough medical devices and IVDs on 15 April 2026, implementing MDCG 2025-9.",
+      "card": {
+        "d": "2026-04-15",
+        "l": "15 avr. 2026",
+        "y": 2026,
+        "t": "Programme pilote UE pour les dispositifs innovants",
+        "x": "La Commission européenne a lancé un programme pilote de soutien aux dispositifs médicaux et DIV innovants (« breakthrough »). Couverture accélérée avec suivi post-marché renforcé.",
+        "u": "https://ec.europa.eu/newsroom/sante/newsletter-archives/74172",
+        "tp": [
+          "mdr"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-15--eu-breakthrough-devices-pilot-programme-launched"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-002",
+      "action": "add",
+      "reason": "MHRA secured GBP 3.6M to expand AI Airlock regulatory sandbox, announced April 2026. Phase 2 report expected Summer 2026.",
+      "card": {
+        "d": "2026-04-15",
+        "l": "15 avr. 2026",
+        "y": 2026,
+        "t": "MHRA AI Airlock — Extension à 3,6 M£",
+        "x": "Le DHSC a alloué 1,2 M£/an sur 3 ans pour étendre le bac à sable réglementaire AI Airlock de la MHRA pour les dispositifs médicaux basés sur l'IA.",
+        "u": "https://www.digitalhealth.net/2026/04/mhra-secures-3-6m-to-expand-ai-regulatory-sandbox/",
+        "tp": [
+          "uk",
+          "ai"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-15--mhra-ai-airlock-expansion-3-6m-funding"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-003",
+      "action": "add",
+      "reason": "UK and US announced deepened regulatory cooperation on medical devices in April 2026, exploring mutual recognition.",
+      "card": {
+        "d": "2026-04-15",
+        "l": "15 avr. 2026",
+        "y": 2026,
+        "t": "Coopération réglementaire UK-US sur les dispositifs médicaux",
+        "x": "La MHRA et la FDA ont annoncé un renforcement de leur coopération sur la réglementation des DM, explorant de futurs mécanismes de reconnaissance mutuelle.",
+        "u": "https://www.gov.uk/government/news/uk-and-us-deepen-regulatory-cooperation-on-medical-devices-building-on-wider-pharmaceutical-partnership",
+        "tp": [
+          "uk",
+          "us"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-15--uk-us-medical-device-regulatory-cooperation"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-004",
+      "action": "add",
+      "reason": "Health Canada published pre-market guidance for ML-enabled medical devices on 1 April 2026.",
+      "card": {
+        "d": "2026-04-01",
+        "l": "1er avr. 2026",
+        "y": 2026,
+        "t": "Canada : Guide DM avec apprentissage automatique",
+        "x": "Santé Canada a publié un guide pré-marché pour les dispositifs médicaux utilisant l'apprentissage automatique, couvrant les données d'entraînement, la validation et la surveillance continue.",
+        "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
+        "tp": [
+          "other",
+          "ai"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-01--canada-ml-enabled-medical-device-guidance-publish"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-005",
+      "action": "add",
+      "reason": "IMDRF published 29th Management Committee meeting outcome statement on 7 April 2026, covering SaMD and AI/ML working group progress.",
+      "card": {
+        "d": "2026-04-07",
+        "l": "7 avr. 2026",
+        "y": 2026,
+        "t": "IMDRF 29e réunion du Comité de gestion — Singapour",
+        "x": "Résultats de la 29e réunion publiés. N90 PCCP pour les DMSN en cours de finalisation (objectif T3 2026). N91 Cadre global de cybersécurité en consultation.",
+        "u": "https://www.imdrf.org/documents/imdrf-29th-mc-meeting-singapore-march-2026-outcome-statement",
+        "tp": [
+          "other",
+          "standards"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-07--imdrf-29th-mc-meeting-singapore-outcome"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-006",
+      "action": "update",
+      "reason": "CNIL/HAS AI Healthcare Guide consultation closed on 16 April 2026. Status changed from consultation open to publication expected Q2 2026.",
+      "existing_id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closes",
+      "card": {
+        "d": "2026-04-16",
+        "l": "16 avr. 2026",
+        "y": 2026,
+        "t": "CNIL/HAS — Guide IA et Santé (consultation close)",
+        "x": "Guide conjoint sur le déploiement de l'IA en santé couvrant l'acquisition jusqu'à la désinstallation, la gouvernance et les spécificités de l'IA générative.",
+        "u": "https://www.cnil.fr/fr/ia-et-sante-la-has-et-la-cnil-lancent-une-consultation-publique-sur-un-projet-de-guide",
+        "tp": [
+          "france",
+          "ai"
+        ],
+        "tg": [
+          "in-force"
+        ],
+        "v": "n",
+        "id": "2026-04-16--cnil-has-ai-healthcare-guide-consultation-closed"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-007",
+      "action": "add",
+      "reason": "CNIL published guidance on tracking pixels in emails on 14 April 2026. Relevant for health apps using email communications.",
+      "card": {
+        "d": "2026-04-14",
+        "l": "14 avr. 2026",
+        "y": 2026,
+        "t": "CNIL : Guide transparence sur les pixels de suivi",
+        "x": "La CNIL a publié un guide exigeant une meilleure transparence sur les pixels de suivi dans les e-mails. Pertinent pour les communications des fabricants de DM.",
+        "u": "https://www.cnil.fr/fr/pixels-de-suivi-dans-les-courriers-electroniques-vous-devez-etre-mieux-informes",
+        "tp": [
+          "france",
+          "data"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-14--cnil-tracking-pixels-transparency-guidance"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-008",
+      "action": "add",
+      "reason": "Japan PMDA mandated eCTD v4.0 format from 1 April 2026 and established priority review for revolutionary SaMD.",
+      "card": {
+        "d": "2026-04-01",
+        "l": "1er avr. 2026",
+        "y": 2026,
+        "t": "Japon : eCTD v4.0 obligatoire + Examen prioritaire DMSN révolutionnaires",
+        "x": "Le PMDA n'accepte que le format eCTD v4.0 depuis le 1er avril 2026. Système d'examen prioritaire pour les DMSN révolutionnaires créant de nouvelles catégories thérapeutiques.",
+        "u": "https://mymedicallab.net/japan-medical-device-regulation-news/",
+        "tp": [
+          "other"
+        ],
+        "tg": [
+          "in-force"
+        ],
+        "v": "n",
+        "id": "2026-04-01--japan-ectd-v4-0-mandatory-revolutionary-samd-pr"
+      }
+    },
+    {
+      "id": "proposal-2026-04-17-009",
+      "action": "add",
+      "reason": "FDA held town hall on QMSR and risk-based inspections on 1 April 2026, providing clarity on the new inspection approach.",
+      "card": {
+        "d": "2026-04-01",
+        "l": "1er avr. 2026",
+        "y": 2026,
+        "t": "FDA Town Hall QMSR — Inspections basées sur les risques",
+        "x": "La FDA a tenu un Town Hall sur la mise en œuvre du QMSR et le nouveau programme d'inspection des DM basé sur les risques (7382.850).",
+        "u": "https://www.fda.gov/medical-devices/medical-devices-news-and-events/town-hall-fdas-quality-management-system-regulation-qmsr-medical-device-risk-based-inspections",
+        "tp": [
+          "us",
+          "standards"
+        ],
+        "tg": [
+          "new"
+        ],
+        "v": "n",
+        "id": "2026-04-01--fda-qmsr-town-hall-risk-based-inspections"
+      }
+    }
+  ]
 }
