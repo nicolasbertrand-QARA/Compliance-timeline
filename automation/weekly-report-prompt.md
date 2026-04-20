@@ -97,7 +97,7 @@ Include a standards monitoring annex table noting any changes detected this week
 
 ## STEP 4: BUILD AND SEND HTML EMAIL
 
-Build a stunning HTML email visually aligned with Theodo HealthTech's graphic guidelines and send it to nicolas.bertrand@theodo.com, thomas.walter@theodo.com, clemence.faulcon@theodo.com, and manon.thiberge@theodo.com using the gws CLI.
+Build a stunning HTML email visually aligned with Theodo HealthTech's graphic guidelines and send it to nicolas.bertrand@theodo.com, thomas.walter@theodo.com, clemence.faulcon@theodo.com, manon.thiberge@theodo.com, and louise.balague@theodo.com using the gws CLI.
 
 ### Brand Guidelines (Theodo HealthTech)
 - Primary dark navy: #1c2837 / #213045
@@ -135,7 +135,7 @@ import base64, json, subprocess, email.mime.text, email.mime.multipart
 
 # Build MIME message
 msg = email.mime.multipart.MIMEMultipart('alternative')
-msg['To'] = 'nicolas.bertrand@theodo.com, thomas.walter@theodo.com, clemence.faulcon@theodo.com, manon.thiberge@theodo.com'
+msg['To'] = 'nicolas.bertrand@theodo.com, thomas.walter@theodo.com, clemence.faulcon@theodo.com, manon.thiberge@theodo.com, louise.balague@theodo.com'
 msg['Subject'] = 'Regulatory Watch - Medical Device Software & AI Act - [DATE]'
 msg['From'] = 'me'
 
@@ -163,15 +163,15 @@ Replace [DATE] with today's date.
 
 ## STEP 5: UPDATE REGULATORY TIMELINE
 
-After sending the email, update the compliance timeline at the local git repo `/tmp/Compliance-timeline/`.
+After sending the email, update the compliance timeline at the local git repo `/Users/nicolasbertrand/.claude/regulatory-watch/repo/`.
 
 ### 5a. Pull the latest repo
 ```bash
-cd /tmp && ([ -d Compliance-timeline ] && cd Compliance-timeline && git pull || git clone https://github.com/nicolasbertrand-QARA/Compliance-timeline.git && cd Compliance-timeline)
+cd /Users/nicolasbertrand/.claude/regulatory-watch/repo && git pull
 ```
 
 ### 5b. Read current data
-Read `/tmp/Compliance-timeline/data.json` to see the existing timeline milestones.
+Read `/Users/nicolasbertrand/.claude/regulatory-watch/repo/data.json` to see the existing timeline milestones.
 
 ### 5c. Generate proposals
 Based on your research findings, generate proposals for timeline changes. Compare your research with the existing milestones in data.json:
@@ -206,7 +206,7 @@ Valid tags: critical, high, medium, new, in-force, draft, proposed
 Valid visual variants (v): "c" (critical/dark card), "h" (highlight/gold card), "n" (normal)
 
 ### 5d. Write proposals.json
-Write the proposals to `/tmp/Compliance-timeline/proposals.json`:
+Write the proposals to `/Users/nicolasbertrand/.claude/regulatory-watch/repo/proposals.json`:
 ```json
 {
   "generated": "YYYY-MM-DD",
@@ -214,10 +214,15 @@ Write the proposals to `/tmp/Compliance-timeline/proposals.json`:
 }
 ```
 
-### 5e. Push to GitHub
+### 5e. Generate French translations for each proposal
+For each proposal in proposals.json, create a French-translated version of the card. The `id`, `action`, `existing_id`, topics (`tp`), tags (`tg`), variant (`v`), date (`d`), year (`y`), and URL (`u`) stay identical. Translate `t` (title), `x` (description), and `l` (date label, using French format: janv., févr., mars, avr., mai, juin, juill., août, sept., oct., nov., déc.).
+
+Write the French proposals to `/Users/nicolasbertrand/.claude/regulatory-watch/repo/proposals-fr.json` with the same structure.
+
+### 5f. Push to GitHub
 ```bash
-cd /tmp/Compliance-timeline
-git add proposals.json
+cd /Users/nicolasbertrand/.claude/regulatory-watch/repo
+git add proposals.json proposals-fr.json
 git commit -m "Regulatory watch: proposals for [DATE]"
 git push
 ```
