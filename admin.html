@@ -89,6 +89,13 @@
   }
   .gh-token-input:focus { border-color: var(--gold); }
   .gh-token-input::placeholder { color: oklch(50% 0.01 260); }
+  .gh-token-status {
+    font-size: 0.625rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .gh-token-status.ok { color: oklch(70% 0.14 160); }
+  .gh-token-status.none { color: oklch(55% 0.01 260); }
   .topbar-link {
     font-size: 0.75rem;
     font-weight: 500;
@@ -632,6 +639,7 @@
   </div>
   <div class="topbar-right">
     <input type="password" id="gh-token" class="gh-token-input" placeholder="GitHub PAT" title="Personal Access Token (repo scope) for saving decisions">
+    <span id="gh-token-status" class="gh-token-status"></span>
     <a href="index.html" class="topbar-link">&larr; View timeline</a>
   </div>
 </div>
@@ -771,11 +779,23 @@ function saveTagOverride(cid, tag){
 }
 
 // GitHub token persistence
+function updateTokenStatus() {
+  const status = document.getElementById("gh-token-status");
+  if (getGitHubToken()) {
+    status.textContent = "Connected";
+    status.className = "gh-token-status ok";
+  } else {
+    status.textContent = "Local only";
+    status.className = "gh-token-status none";
+  }
+}
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("gh-token");
   input.value = getGitHubToken();
+  updateTokenStatus();
   input.addEventListener("change", () => {
     localStorage.setItem("rw_github_token", input.value.trim());
+    updateTokenStatus();
   });
 });
 
