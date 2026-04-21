@@ -722,10 +722,14 @@ async function init() {
       proposalsGenDate = pd.generated || null;
     }
 
-    // Decisions from repo (shared across devices)
+    // Decisions: try repo first, fall back to localStorage
     let dec = { hidden_cards:[], approved_proposals:[], rejected_proposals:[], deleted_cards:[], comments:{}, comments_fr:{}, tag_overrides:{}, approval_dates:{} };
+    let decLoaded = false;
     if (decResp && decResp.ok) {
-      try { dec = await decResp.json(); } catch(e) {}
+      try { const d = await decResp.json(); if (d.approved_proposals || d.hidden_cards) { dec = d; decLoaded = true; } } catch(e) {}
+    }
+    if (!decLoaded) {
+      try { const local = JSON.parse(localStorage.getItem("rw_decisions")||"null"); if (local) dec = local; } catch(e) {}
     }
 
     const approved = new Set(dec.approved_proposals || []);

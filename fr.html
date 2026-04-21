@@ -718,8 +718,12 @@ async function init() {
     }
 
     let dec = { hidden_cards:[], approved_proposals:[], deleted_cards:[], comments_fr:{}, tag_overrides:{}, approval_dates:{} };
+    let decLoaded = false;
     if (decResp && decResp.ok) {
-      try { dec = await decResp.json(); } catch(e) {}
+      try { const d = await decResp.json(); if (d.approved_proposals || d.hidden_cards) { dec = d; decLoaded = true; } } catch(e) {}
+    }
+    if (!decLoaded) {
+      try { const local = JSON.parse(localStorage.getItem("rw_decisions")||"null"); if (local) dec = local; } catch(e) {}
     }
 
     const approved = new Set(dec.approved_proposals || []);

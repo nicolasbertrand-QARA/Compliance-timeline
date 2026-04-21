@@ -690,12 +690,20 @@ let decisionsSha = null; // GitHub file SHA for updates
 
 function getGitHubToken() { return localStorage.getItem("rw_github_token") || ""; }
 
+function saveDecisionsLocal() {
+  // Always save to localStorage (instant, same-browser)
+  localStorage.setItem("rw_decisions", JSON.stringify(decisions));
+}
+
 async function pushDecisions() {
+  // 1. Save locally (instant for this browser)
+  saveDecisionsLocal();
+  showToast();
+
+  // 2. Push to GitHub (async, for cross-device sync)
   const token = getGitHubToken();
-  if (!token) {
-    showToast("Set GitHub token first!");
-    return;
-  }
+  if (!token) return; // No PAT = local-only mode, still works
+
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(decisions, null, 2))));
   try {
     const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
@@ -713,15 +721,14 @@ async function pushDecisions() {
     if (resp.ok) {
       const data = await resp.json();
       decisionsSha = data.content.sha;
-      showToast();
+      showToast("Synced");
     } else {
       const err = await resp.json();
       console.error("GitHub push failed:", err);
-      showToast("Push failed — check console");
+      showToast("Saved locally (sync failed)");
     }
   } catch(e) {
     console.error("GitHub push error:", e);
-    showToast("Push failed — check console");
   }
 }
 
@@ -1180,20 +1187,44 @@ async function init() {
       allProposals = propData.proposals || [];
     }
 
-    // Load decisions from GitHub API (to get SHA for future updates)
+    // Load decisions: try GitHub API first (for SHA), then Pages, then localStorage
+    let decLoaded = false;
     if (decResp && decResp.ok) {
-      const ghFile = await decResp.json();
-      decisionsSha = ghFile.sha;
       try {
-        decisions = JSON.parse(atob(ghFile.content.replace(/\n/g, "")));
-      } catch(e) {
-        console.warn("Failed to parse decisions.json:", e);
-      }
-    } else {
-      // Fallback: fetch from Pages
+        const ghFile = await decResp.json();
+        decisionsSha = ghFile.sha;
+        const parsed = JSON.parse(atob(ghFile.content.replace(/\n/g, "")));
+        // Only use if it has real content (not empty defaults)
+        if (parsed.approved_proposals?.length || parsed.hidden_cards?.length ||
+            parsed.rejected_proposals?.length || Object.keys(parsed.comments || {}).length ||
+            Object.keys(parsed.tag_overrides || {}).length) {
+          decisions = parsed;
+          decLoaded = true;
+        }
+      } catch(e) { console.warn("GitHub API parse failed:", e); }
+    }
+    if (!decLoaded) {
+      // Try localStorage (for same-browser instant access)
+      try {
+        const local = JSON.parse(localStorage.getItem("rw_decisions") || "null");
+        if (local && (local.approved_proposals?.length || local.hidden_cards?.length ||
+            local.rejected_proposals?.length || Object.keys(local.comments || {}).length ||
+            Object.keys(local.tag_overrides || {}).length)) {
+          decisions = local;
+          decLoaded = true;
+        }
+      } catch(e) {}
+    }
+    if (!decLoaded) {
+      // Try fetching from Pages
       try {
         const fallback = await fetch("decisions.json");
-        if (fallback.ok) decisions = await fallback.json();
+        if (fallback.ok) {
+          const parsed = await fallback.json();
+          if (parsed.approved_proposals?.length || parsed.hidden_cards?.length) {
+            decisions = parsed;
+          }
+        }
       } catch(e) {}
     }
 
