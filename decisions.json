@@ -3,10 +3,14 @@
   "approved_proposals": [
     "proposal-2026-04-17-001"
   ],
-  "rejected_proposals": [],
+  "rejected_proposals": [
+    "proposal-2026-04-17-002"
+  ],
   "deleted_cards": [],
   "comments": {},
   "comments_fr": {},
   "tag_overrides": {},
-  "approval_dates": {}
+  "approval_dates": {
+    "proposal-2026-04-17-001": "2026-04-21"
+  }
 }
