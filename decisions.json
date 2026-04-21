@@ -1,6 +1,8 @@
 {
   "hidden_cards": [],
-  "approved_proposals": [],
+  "approved_proposals": [
+    "proposal-2026-04-17-001"
+  ],
   "rejected_proposals": [],
   "deleted_cards": [],
   "comments": {},
