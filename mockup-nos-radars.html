@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Radars — Theodo (Mockup)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Poppins, sans-serif; background: #fff; color: #1d2939; }
+
+  /* Nav */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px; background: #fff; border-bottom: 1px solid #f0f0f0;
+  }
+  .nav-logo { height: 28px; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; color: #1d2939; font-weight: 500; }
+  .nav-links span { opacity: 0.7; cursor: pointer; }
+  .nav-links span:hover { opacity: 1; }
+  .nav-contact {
+    background: #FF512C; color: #fff; border-radius: 24px; padding: 8px 20px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb { padding: 16px 48px; font-size: 12px; color: #999; }
+  .breadcrumb a { color: #999; text-decoration: none; }
+
+  /* Page title */
+  .page-title { padding: 0 48px 24px; }
+  .page-title h1 { font-size: 36px; font-weight: 700; }
+
+  /* Radar cards */
+  .radar-cards { padding: 0 48px 40px; display: flex; gap: 24px; }
+  .radar-card {
+    width: 320px; height: 180px; border-radius: 16px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, #2a1810 0%, #4a2820 100%);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .radar-card:hover { transform: translateY(-4px); }
+  .radar-card span { color: #fff; font-size: 24px; font-weight: 600; z-index: 1; }
+  .radar-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 50%, rgba(255,200,0,0.15) 0%, transparent 60%);
+  }
+  .radar-card--healthtech {
+    background: linear-gradient(135deg, #12305d 0%, #1a4080 100%);
+  }
+
+  /* Timeline section */
+  .timeline-section { padding: 0 48px 64px; }
+  .section-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #ffc800; background: #12305d;
+    padding: 4px 12px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .timeline-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .timeline-section p { font-size: 14px; color: #666; margin-bottom: 24px; max-width: 600px; }
+  .timeline-embed {
+    border-radius: 16px; overflow: hidden; border: 1px solid #e8e8e8;
+    height: 80vh; min-height: 600px;
+  }
+  .timeline-embed iframe { width: 100%; height: 100%; border: none; }
+
+  /* Footer */
+  .footer {
+    background: #f6f7f8; padding: 48px; display: flex; justify-content: space-between;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .footer-col a { display: block; font-size: 13px; color: #666; text-decoration: none; margin-bottom: 8px; }
+  .footer-col a:hover { color: #FF512C; }
+  .footer-logo { height: 24px; margin-bottom: 16px; }
+  .footer-cta {
+    background: #FF512C; color: #fff; border-radius: 24px; padding: 10px 24px;
+    font-size: 13px; font-weight: 600; text-decoration: none; display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .nav { padding: 12px 16px; }
+    .nav-links { display: none; }
+    .breadcrumb, .page-title, .radar-cards, .timeline-section { padding-left: 16px; padding-right: 16px; }
+    .radar-cards { flex-direction: column; }
+    .radar-card { width: 100%; }
+    .timeline-embed { height: 70vh; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <img src="https://cdn.prod.website-files.com/6807c26199de0ea49931558a/6807c26199de0ea499315625_Logo%20Theodo.svg" class="nav-logo" alt="theodo.">
+  <div class="nav-links">
+    <span>Expertises</span>
+    <span>Secteurs</span>
+    <span>Insights</span>
+    <span>A propos</span>
+    <span>Carri&egrave;res</span>
+  </div>
+  <a href="#" class="nav-contact">Contact</a>
+</nav>
+
+<div class="breadcrumb"><a href="#">Accueil</a> &gt; Nos Radars</div>
+
+<div class="page-title"><h1>Nos Radars</h1></div>
+
+<div class="radar-cards">
+  <div class="radar-card"><span>Data</span></div>
+  <div class="radar-card radar-card--healthtech"><span>HealthTech</span></div>
+</div>
+
+<div class="timeline-section">
+  <span class="section-label">HealthTech</span>
+  <h2>Timeline R&eacute;glementaire MDSW</h2>
+  <p>Jalons r&eacute;glementaires cl&eacute;s pour les fabricants de logiciels dispositifs m&eacute;dicaux, de 2026 &agrave; 2030.</p>
+  <div class="timeline-embed">
+    <iframe src="https://nicolasbertrand-qara.github.io/Compliance-timeline/fr.html" loading="lazy"></iframe>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-col">
+    <img src="https://cdn.prod.website-files.com/6807c26199de0ea49931558a/6807c26199de0ea499315625_Logo%20Theodo.svg" class="footer-logo" alt="theodo.">
+    <a href="#" class="footer-cta">Nous contacter</a>
+  </div>
+  <div class="footer-col">
+    <h4>Expertises</h4>
+    <a href="#">AI Modernisation</a>
+    <a href="#">Data</a>
+    <a href="#">Intelligence Artificielle</a>
+  </div>
+  <div class="footer-col">
+    <h4>Secteurs</h4>
+    <a href="#">Services Financiers</a>
+    <a href="#">Sant&eacute;</a>
+    <a href="#">Secteur Public</a>
+  </div>
+  <div class="footer-col">
+    <h4>Insights</h4>
+    <a href="#">Nos Radars</a>
+    <a href="#">Livre blancs</a>
+    <a href="#">Leaders</a>
+  </div>
+</footer>
+
+</body>
+</html>
