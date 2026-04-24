@@ -703,15 +703,14 @@ function saveDecisionsLocal() {
   localStorage.setItem("rw_decisions", JSON.stringify(decisions));
 }
 
-async function pushDecisions() {
-  // 1. Save locally (instant for this browser)
-  saveDecisionsLocal();
-  showToast();
+let _pushTimer = null;
+let _pushPending = false;
 
-  // 2. Push to GitHub (async, for cross-device sync)
+async function _doPush() {
   const token = getGitHubToken();
-  if (!token) return; // No PAT = local-only mode, still works
+  if (!token) return;
 
+  _pushPending = true;
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(decisions, null, 2))));
   try {
     const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DEC_PATH}`, {
@@ -738,6 +737,20 @@ async function pushDecisions() {
   } catch(e) {
     console.error("GitHub push error:", e);
   }
+  _pushPending = false;
+}
+
+function pushDecisions() {
+  // 1. Save locally (instant)
+  saveDecisionsLocal();
+  showToast();
+
+  // 2. Debounce GitHub push — wait 3s after last action before committing
+  // This batches rapid clicks (approve, approve, approve) into a single commit
+  clearTimeout(_pushTimer);
+  _pushTimer = setTimeout(() => {
+    if (!_pushPending) _doPush();
+  }, 3000);
 }
 
 // Accessors that read from in-memory decisions object
