@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-08",
+  "generated": "2026-05-15",
   "proposals": [
     {
       "id": "proposal-2026-05-08-001",
@@ -173,6 +173,125 @@
         "tp": ["mdr", "ai"],
         "tg": ["critical"],
         "v": "c"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-001",
+      "action": "add",
+      "reason": "Korea's MFDS approved the country's first generative AI medical device (chest X-ray analyser with text summarisation) in April 2026 — operational validation of MFDS Generative AI guidelines (24 Jan 2025). Signals South Korea as fastest jurisdiction for genAI MDSW.",
+      "card": {
+        "id": "2026-04-01--korea-first-generative-ai-medical-device-approval",
+        "d": "2026-04-01",
+        "l": "Apr 2026",
+        "y": 2026,
+        "t": "Korea — First Generative-AI Medical Device Approved",
+        "x": "MFDS grants first approval for a generative AI medical device (chest X-ray analyser with text summarisation). Operational validation of MFDS Generative AI guidelines (Jan 2025). Korea now leading genAI MDSW market access.",
+        "u": "https://en.sedaily.com/culture/2026/04/01/korea-grants-first-approval-for-generative-ai-medical-device",
+        "tp": ["other", "ai"],
+        "tg": ["high", "new"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-002",
+      "action": "add",
+      "reason": "MHRA secured £3.6M (£1.2M/year × 3 years 2026-2029) to expand its AI Airlock regulatory sandbox. Phase 2 closes Spring 2026 (reports Summer 2026); Phase 3 call later in 2026. Major signal UK is positioning as fast-validation jurisdiction for genAI / LLM medical software.",
+      "card": {
+        "id": "2026-04-15--mhra-ai-airlock-funding-expansion",
+        "d": "2026-04-15",
+        "l": "Apr 2026",
+        "y": 2026,
+        "t": "MHRA AI Airlock — £3.6M Funding Expansion",
+        "x": "DHSC allocates £1.2M/year × 3 years (2026-2029). Phase 2 closes Spring 2026 with reports in Summer 2026 (AI diagnostics, PCCPs, LLMs, voice tools, rare-disease diagnostics). Phase 3 design later in 2026.",
+        "u": "https://www.gov.uk/government/news/mhra-expands-ai-airlock-programme-with-a-36-million-funding-boost-over-three-years",
+        "tp": ["uk", "ai"],
+        "tg": ["high", "new"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-003",
+      "action": "add",
+      "reason": "On 5 February 2026 the Australian TGA published an updated guidance on AI in medical device software, clarifying that AI is regulated under the existing SaMD framework and does not auto-increase risk class. Important for clients pursuing TGA listings.",
+      "card": {
+        "id": "2026-02-05--australia-tga-ai-medical-device-guidance",
+        "d": "2026-02-05",
+        "l": "5 Feb 2026",
+        "y": 2026,
+        "t": "Australia TGA — AI Medical Device Guidance Update",
+        "x": "AI not regulated separately; full SaMD framework applies. Use of AI does not auto-increase risk class. Lifecycle management, change control, clinical evidence and scope-creep obligations apply.",
+        "u": "https://www.tga.gov.au/products/medical-devices/software-and-artificial-intelligence/manufacturing/artificial-intelligence-ai-and-medical-device-software",
+        "tp": ["other", "ai"],
+        "tg": ["medium", "new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-004",
+      "action": "add",
+      "reason": "Two decrees of 21 April 2026 (published in Official Journal) modify the French Code de la santé publique to align the national framework with MDR/IVDR obligations. Direct impact on French market deployment dossiers for Theodo clients.",
+      "card": {
+        "id": "2026-04-21--france-public-health-code-mdr-ivdr-alignment",
+        "d": "2026-04-21",
+        "l": "21 Apr 2026",
+        "y": 2026,
+        "t": "France — Public Health Code Aligned with MDR/IVDR",
+        "x": "Two decrees published in the Official Journal modify the Code de la santé publique to align French national framework with MDR/IVDR obligations.",
+        "u": "https://www.dm-experts.fr/2026/05/code-de-la-sante-publique-adaptation-du-cadre-national-aux-exigences-du-rdm-et-du-rdmdiv/",
+        "tp": ["france", "mdr"],
+        "tg": ["medium", "new"],
+        "v": "n"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-005",
+      "action": "add",
+      "reason": "IMDRF released a draft harmonised technical framework for AI medical device lifecycle management on 6 May 2026 (out of the 29th MC Meeting, Singapore, March 2026). First convergence signal between FDA PCCP, MHRA AI Airlock, Health Canada MLMD, and PMDA IDATEN approaches.",
+      "card": {
+        "id": "2026-05-06--imdrf-ai-lifecycle-management-framework-draft",
+        "d": "2026-05-06",
+        "l": "6 May 2026",
+        "y": 2026,
+        "t": "IMDRF AI Lifecycle Management Framework — Draft",
+        "x": "Draft harmonised technical framework for managing AI-based medical device lifecycles. First convergence signal between FDA PCCP, MHRA AI Airlock, Health Canada MLMD, and PMDA IDATEN.",
+        "u": "https://www.dm-experts.fr/2026/05/imdrf-cadre-technique-pour-la-gestion-du-cycle-de-vie-de-lintelligence-artificielle/",
+        "tp": ["ai", "standards"],
+        "tg": ["high", "draft"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-006",
+      "action": "add",
+      "reason": "MDCG 2025-10 (issued 19 Dec 2025) is the new PMS guidance for MDR/IVDR — shifts from reactive complaint-driven to proactive data-generating PMS systems integrated with QMS. Affects every Theodo client. Missing from data.json — should be in the timeline.",
+      "card": {
+        "id": "2025-12-19--mdcg-2025-10-pms-guidance",
+        "d": "2025-12-19",
+        "l": "19 Dec 2025",
+        "y": 2025,
+        "t": "MDCG 2025-10 — Post-Market Surveillance Guidance",
+        "x": "New EU PMS guidance under MDR/IVDR: shift from reactive to proactive data-generating PMS, integrated into QMS, with PMCF/PMPF, indicators for benefit-risk reassessment, and EUDAMED data sourcing. Mandatory rework of PMS plans.",
+        "u": "https://health.ec.europa.eu/document/download/a9ad86b7-1b8e-4bae-beb4-48b2b3ed2f05_en?filename=mdcg_2025-10_en.pdf",
+        "tp": ["mdr"],
+        "tg": ["high", "in-force"],
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-05-15-007",
+      "action": "add",
+      "reason": "New MIR 7.3.1 manufacturer incident report PDF and XSD/XSL files now accepted from 1 May 2026 (SB 11154). Operational vigilance/PMS update — every Theodo client with incidents in pipeline must update their reporting tooling.",
+      "card": {
+        "id": "2026-05-01--mir-7-3-1-manufacturer-incident-report",
+        "d": "2026-05-01",
+        "l": "1 May 2026",
+        "y": 2026,
+        "t": "MIR 7.3.1 — Incident Report Forms in Force",
+        "x": "New manufacturer incident report PDF and XSD/XSL files in force from 1 May 2026 (SB 11154). EC published guidance on which MIR 7.3.1 versions are accepted. Operational vigilance update required.",
+        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance/pmsv-reporting-forms_en",
+        "tp": ["mdr"],
+        "tg": ["medium", "in-force"],
+        "v": "n"
       }
     }
   ]
