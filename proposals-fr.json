@@ -1,268 +1,73 @@
 {
-  "generated": "2026-06-19",
+  "generated": "2026-06-26",
   "proposals": [
     {
-      "id": "proposal-2026-06-19-001",
+      "id": "proposal-2026-06-26-001",
       "action": "add",
-      "reason": "EC announced Commission Implementing Decision (EU) 2026/1231 adding/updating MDR harmonised standards (page updated 17 Jun 2026); new presumption-of-conformity references manufacturers must map to GSPRs.",
+      "reason": "This week's only material EU development: the European Parliament adopted the AI Act Digital Omnibus on 16 Jun 2026 (423-57-174); Council formal adoption expected 29 Jun, then OJEU. Adds the procedural milestone that triggers the deferred high-risk dates.",
       "card": {
-        "id": "2026-06-11--mdr-harmonised-standards-decision-2026-1231",
-        "d": "2026-06-11",
-        "l": "11 juin 2026",
+        "id": "2026-06-29--ai-act-digital-omnibus-council-adoption",
+        "d": "2026-06-29",
+        "l": "29 juin 2026",
         "y": 2026,
-        "t": "Normes harmonisées MDR — Décision (UE) 2026/1231",
-        "x": "Nouvelles normes harmonisées ajoutées au titre du MDR conférant présomption de conformité. Lire la liste au JOUE et mettre à jour la cartographie exigences essentielles / normes.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
-        "tp": [
-          "mdr",
-          "standards"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-002",
-      "action": "add",
-      "reason": "OJEU reference to EN ISO 15223-1:2021/A1:2025 plus MDCG 2021-5 Rev.1 Appendix formalised the EC REP to EU REP authorised-representative symbol change (17 Jun 2026); labelling change-control item with 2031 transition deadlines.",
-      "card": {
-        "id": "2026-06-17--ec-rep-to-eu-rep-symbol-transition",
-        "d": "2026-06-17",
-        "l": "17 juin 2026",
-        "y": 2026,
-        "t": "Transition du symbole EC REP → EU REP",
-        "x": "EN ISO 15223-1:2021/A1:2025 citée au JOUE + appendice MDCG 2021-5 Rev.1. Modification éditoriale du symbole du mandataire; rôle du mandataire inchangé. Transition jusqu'au 15 juin 2031 (MDR) / 17 juin 2031 (IVDR).",
-        "u": "https://medenvoyglobal.com/blog/mdcg-issues-guidance-on-transition-from-ec-rep-to-eu-rep-symbol-on-medical-device-labeling/",
-        "tp": [
-          "mdr",
-          "standards"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-003",
-      "action": "add",
-      "reason": "EC published a position paper on managing the Summary of Safety and (Clinical) Performance in EUDAMED now the first four modules are mandatory (18 Jun 2026); affects Class III/implantable/IVD C-D.",
-      "card": {
-        "id": "2026-06-18--sscp-management-in-eudamed-position-paper",
-        "d": "2026-06-18",
-        "l": "18 juin 2026",
-        "y": 2026,
-        "t": "Gestion du SS(C)P dans EUDAMED — Position Paper",
-        "x": "Note de position de la CE sur la gestion du résumé des caractéristiques de sécurité et des performances (cliniques) maintenant que les modules EUDAMED sont obligatoires. Concerne classe III / implantables / DIV classe C-D. Référence « MDCG 2026-4 » non confirmée; à vérifier avant citation.",
-        "u": "https://health.ec.europa.eu/medical-devices-sector/new-regulations_en",
-        "tp": [
-          "mdr"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-004",
-      "action": "add",
-      "reason": "ISO 14155 Edition 4 was published 23 Mar 2026 and applies immediately to new clinical investigations with no transition period; not yet on the timeline and relevant where MDSW needs a clinical investigation.",
-      "card": {
-        "id": "2026-03-23--iso-14155-2026-edition-4-in-force",
-        "d": "2026-03-23",
-        "l": "23 mars 2026",
-        "y": 2026,
-        "t": "ISO 14155:2026 (édition 4) en vigueur",
-        "x": "Applicable immédiatement aux nouvelles investigations cliniques, sans transition. Intègre obligatoirement la gestion des risques, des comités d'événements cliniques / de surveillance des données et un cadre d'estimands.",
-        "u": "https://www.iso.org/standard/83968.html",
-        "tp": [
-          "standards"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-005",
-      "action": "add",
-      "reason": "IMDRF draft framework on best practices for AI-enabled medical devices closed public consultation 10 Jun 2026, building on 2025 GMLP; dispositions head to the Sep 2026 Management Committee. Likely future global reference text.",
-      "card": {
-        "id": "2026-06-10--imdrf-ai-best-practices-consultation-closed",
-        "d": "2026-06-10",
-        "l": "10 juin 2026",
-        "y": 2026,
-        "t": "Cadre IMDRF bonnes pratiques IA — consultation close",
-        "x": "Projet de cadre harmonisant les bonnes pratiques pour réduire les risques des DM intégrant de l'IA sur le cycle de vie (suite des GMLP 2025). Consultation close le 10 juin; suites au Comité de gestion IMDRF 14-18 sept. 2026, Singapour.",
-        "u": "https://www.raps.org/resource/imdrf-drafts-framework-on-best-practices-for-using-ai-in-medical-devices.html",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-006",
-      "action": "add",
-      "reason": "Health Canada pre-market guidance for machine learning-enabled medical devices is in force since 1 Apr 2026 (lifecycle expectations + PCCP mechanism); a notable global change-control development not yet on the timeline.",
-      "card": {
-        "id": "2026-04-01--health-canada-ml-device-guidance-in-force",
-        "d": "2026-04-01",
-        "l": "1er avr. 2026",
-        "y": 2026,
-        "t": "Santé Canada — guide DM à apprentissage automatique en vigueur",
-        "x": "Attentes cycle de vie pour les DM à apprentissage automatique (qualité des données, entraînement/validation, biais, surveillance des performances, transparence) plus un mécanisme de plan de contrôle des modifications prédéterminé. Guide complémentaire de surveillance post-marché publié le 9 avr. 2026.",
-        "u": "https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/guidance-documents/pre-market-guidance-machine-learning-enabled-medical-devices.html",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-007",
-      "action": "add",
-      "reason": "TGA draft guidance on Predetermined Change Control Plans for AI/software devices closed consultation 5 Jun 2026; finalisation expected to follow. Part of global PCCP convergence.",
-      "card": {
-        "id": "2026-06-05--tga-pccp-draft-consultation-closed",
-        "d": "2026-06-05",
-        "l": "5 juin 2026",
-        "y": 2026,
-        "t": "TGA Australie — projet guide PCCP, consultation close",
-        "x": "Projet de guide permettant de modifier les DM IA/logiciels après commercialisation selon un plan de modification pré-approuvé, sans nouvelle soumission complète. Consultation close le 5 juin 2026; finalisation à suivre.",
-        "u": "https://www.medicalrepublic.com.au/tga-giving-ai-updates-a-longer-leash/125029",
-        "tp": [
-          "other",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-008",
-      "action": "add",
-      "reason": "MHRA pre-market consultation on the draft Medical Devices (Amendment) Regulations 2026 (international reliance routes, strengthened SaMD/IVD, UDI) closed 19 Jun 2026; expected adoption Dec 2026, entry into force Jun 2027.",
-      "card": {
-        "id": "2026-06-19--mhra-medical-devices-amendment-regs-consult",
-        "d": "2026-06-19",
-        "l": "19 juin 2026",
-        "y": 2026,
-        "t": "MHRA — projet de règlement DM (amendement) 2026, consultation close",
-        "x": "Réforme pré-marché: voies de reconnaissance internationale, exigences renforcées SaMD/DIV, IUD et cartes d'implant obligatoires, classification DIV fondée sur le risque. Adoption attendue déc. 2026; entrée en vigueur juin 2027.",
-        "u": "https://www.gov.uk/government/news/mhra-invites-views-on-proposed-changes-to-medical-device-regulation",
-        "tp": [
-          "uk",
-          "mdr"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-009",
-      "action": "add",
-      "reason": "Final tranche of the UK Data (Use and Access) Act 2025 commenced 19 Jun 2026, including a mandatory data-protection complaints process with no small-business exemption; directly relevant to health-data SaMD operators.",
-      "card": {
-        "id": "2026-06-19--uk-duaa-2025-complaints-process-in-force",
-        "d": "2026-06-19",
-        "l": "19 juin 2026",
-        "y": 2026,
-        "t": "UK DUAA 2025 — processus de réclamation obligatoire en vigueur",
-        "x": "Les responsables de traitement doivent offrir une voie de réclamation claire, accuser réception sous 30 jours et instruire sans retard injustifié. Pas d'exemption pour les petites entreprises. Concerne les opérateurs SaMD traitant des données de santé.",
-        "u": "https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/data-use-and-access-act-2025/",
-        "tp": [
-          "uk",
-          "data"
-        ],
-        "tg": [
-          "in-force"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-010",
-      "action": "add",
-      "reason": "MHRA published its AI Airlock Phase 2 programme report (9 Jun 2026) with five insights (notably human oversight is not static across the lifecycle); Phase 3 funded GBP 1.2m/yr to 2029 to feed the forthcoming AIaMD framework.",
-      "card": {
-        "id": "2026-06-09--mhra-ai-airlock-phase-2-report",
-        "d": "2026-06-09",
-        "l": "9 juin 2026",
-        "y": 2026,
-        "t": "MHRA — rapport AI Airlock phase 2",
-        "x": "Sept technologies IA, cinq enseignements: la performance en conditions réelles est difficile à reproduire en environnement contrôlé; la supervision humaine ne peut être figée sur le cycle de vie. Phase 3 financée 1,2 M£/an (2026-2029) pour alimenter le cadre AIaMD.",
-        "u": "https://medregs.blog.gov.uk/2026/06/09/advancing-ai-regulation-in-healthcare-insights-from-ai-airlock-phase-2/",
-        "tp": [
-          "uk",
-          "ai"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-011",
-      "action": "add",
-      "reason": "CNIL updated and widened the scope of reference methodologies MR-001 and MR-003 for health research, applicable to research initiated from 23 May 2026; relevant to French-market MDSW running clinical research.",
-      "card": {
-        "id": "2026-05-23--cnil-mr-001-mr-003-updated",
-        "d": "2026-05-23",
-        "l": "23 mai 2026",
-        "y": 2026,
-        "t": "CNIL MR-001 / MR-003 mises à jour (France)",
-        "x": "Méthodologies de référence pour la recherche en santé mises à jour et au champ élargi, applicables aux recherches initiées à partir du 23 mai 2026. Un document consolidé sur le dossier patient informatisé est prévu en 2026.",
-        "u": "https://www.cnil.fr/fr/recherche-en-sante-la-cnil-met-jour-et-elargit-le-champ-des-methodologies-de-reference-001-et-003",
-        "tp": [
-          "france",
-          "data"
-        ],
-        "tg": [
-          "new"
-        ],
-        "v": "n"
-      }
-    },
-    {
-      "id": "proposal-2026-06-19-012",
-      "action": "update",
-      "reason": "Existing prEN 18286 card asserts a 'failed Jan 2026 vote' that could not be substantiated against primary sources this week; corrected to reflect the public enquiry closed 22 Jan 2026 and AI Act harmonised-standards delivery slipping to end-2026 at the earliest.",
-      "card": {
-        "id": "2026-10-15--pren-18286-ai-act-qms-standard-revised",
-        "d": "2026-10-15",
-        "l": "fin 2026",
-        "y": 2026,
-        "t": "prEN 18286 — norme SMQ IA Act toujours en cours",
-        "x": "Première norme harmonisée pour le SMQ au titre de l'IA Act (article 17). L'enquête publique CEN/CENELEC JTC 21 s'est tenue du 30 oct. 2025 au 22 janv. 2026; la livraison des normes harmonisées IA Act glisse désormais à fin 2026 au plus tôt. Pas encore citée au JOUE.",
-        "u": "https://cms-lawnow.com/en/ealerts/2025/12/the-first-draft-ai-act-standard-for-public-consultation-what-pren-18286-quality-management-system-for-eu-ai-act-regulatory-purposes-signals-for",
+        "t": "Digital Omnibus IA : adoption du Conseil attendue",
+        "x": "Le Parlement européen a adopté le Digital Omnibus le 16 juin 2026 (423-57-174). Adoption formelle du Conseil attendue le 29 juin, puis publication au Journal officiel (JOUE). Confirme le report des échéances haut risque au 2 décembre 2027 (Annexe III autonomes) et au 2 août 2028 (Annexe I, dont les dispositifs médicaux), et ajoute une nouvelle interdiction Article 5 visant les générateurs d'images intimes non consenties. Tant que le texte n'est pas publié au JOUE, le calendrier initial de l'AI Act reste la base juridiquement applicable.",
+        "u": "https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/",
         "tp": [
           "ai",
-          "standards"
+          "mdr"
         ],
         "tg": [
-          "medium"
+          "high",
+          "new"
         ],
-        "v": "n"
-      },
-      "existing_id": "2026-10-15--pren-18286-ai-act-qms-standard-revised"
+        "v": "h"
+      }
+    },
+    {
+      "id": "proposal-2026-06-26-002",
+      "action": "update",
+      "reason": "The deferred Annex I / medical-devices date is now near-confirmed after the 16 Jun Parliament adoption and the expected 29 Jun Council adoption; update the description to reflect the procedural status and soften 'if delayed' to 'deferred'.",
+      "existing_id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
+      "card": {
+        "id": "2028-08-02--ai-act-annex-i-medical-devices-if-delayed",
+        "d": "2028-08-02",
+        "l": "août 2028",
+        "y": 2028,
+        "t": "AI Act Annexe I / dispositifs médicaux (reporté)",
+        "x": "Date d'application reportée pour les systèmes d'IA relevant de la législation d'harmonisation de l'UE, dont les dispositifs médicaux (Annexe I). Quasi confirmé : le Parlement a adopté le Digital Omnibus le 16 juin 2026 ; adoption formelle du Conseil attendue le 29 juin, puis publication au JOUE. Effet juridique seulement à la publication au Journal officiel.",
+        "u": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+        "tp": [
+          "ai",
+          "mdr"
+        ],
+        "tg": [
+          "critical"
+        ],
+        "v": "c"
+      }
+    },
+    {
+      "id": "proposal-2026-06-26-003",
+      "action": "update",
+      "reason": "The deferred Annex III standalone date is now near-confirmed after the 16 Jun Parliament adoption; update the description to reflect the procedural status and soften 'if delayed' to 'deferred'.",
+      "existing_id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
+      "card": {
+        "id": "2027-12-02--ai-act-high-risk-annex-iii-if-delayed",
+        "d": "2027-12-02",
+        "l": "déc. 2027",
+        "y": 2027,
+        "t": "AI Act haut risque Annexe III (reporté)",
+        "x": "Date d'application reportée pour les systèmes d'IA haut risque autonomes de l'Annexe III au titre du Digital Omnibus. Quasi confirmé : le Parlement a adopté le 16 juin 2026 ; adoption du Conseil attendue le 29 juin, puis publication au JOUE.",
+        "u": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",
+        "tp": [
+          "ai"
+        ],
+        "tg": [
+          "high"
+        ],
+        "v": "h"
+      }
     }
   ]
 }
